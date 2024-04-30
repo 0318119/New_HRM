@@ -1,0 +1,59 @@
+.emp_salary_depart_table{
+    padding: 20px 15px;
+    box-shadow: 2px 1px 12px #8080801f;
+    border-radius: 10px;
+}
+h5.emp_salary_depart_table_head{
+    padding: 0 10px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: 700;
+}
+.emp_salary_depart_table table tr td:nth-child(1){
+    text-align: end;
+    padding-left: 10px;
+    background: transparent;
+    font-size: 13px;
+}
+.emp_salary_depart_table table tr td{
+    background: rgb(125, 175, 179);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+}
+.clendar{
+    background: transparent !important;
+    font-size: 11px !important;
+    white-space: pre;
+}
+
+/* EMP FEEDBACK TABLES CSS =================== */
+.feedbackBox{
+    padding: 10px;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 2px 1px 12px #8080801f;
+}
+.feedbackBox h5{
+    padding: 0 10px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: 700;
+}
+.feedBack_tables table{
+    height: 300px;
+}
+.feedBack_tables thead tr th{
+    background: #014F86 !important;
+    color: white !important;
+    font-size: 12px;
+    white-space: pre;
+    text-align: center !important;
+}
+.feedBack_tables table tbody tr td{
+    background: white;
+    cursor: pointer;
+    overflow-wrap: unset !important;
+    text-align: center;
+    padding: 0 !important;
+}
