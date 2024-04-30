@@ -60,7 +60,7 @@ export default function PieCharts() {
   );
 
   return (
-    <PieChart width={400} height={250}>
+    <PieChart width={400} height={210}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}

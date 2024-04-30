@@ -14,18 +14,28 @@ import NiddlePie3 from './InnerDashboard/Charts/NiddlePie3';
 import NiddlePie4 from './InnerDashboard/Charts/NiddlePie4';
 import { CiCircleInfo } from "react-icons/ci";
 import HorizontalCharts from './InnerDashboard/Charts/HorizontalCharts';
+import { BiSolidDoughnutChart } from "react-icons/bi";
 
 
 const InnerDashboard = () => {
 
 
-  const options = [];
-  for (let i = 10; i < 36; i++) {
-    options.push({
-      value: i.toString(36) + i,
-      label: i.toString(36) + i,
-    });
-  }
+  const options = [
+    { value: "All", label: "All" },
+    { value: "Administration", label: "Administration" },
+    { value: "Finance", label: "Finance" },
+    { value: "Sale", label: "Sale" },
+    { value: "IT", label: "IT" },
+    { value: "Human Resource", label: "Human Resource" },
+    { value: "Marketing", label: "Marketing" },
+    { value: "Customer Support", label: "Customer Support" },
+  ];
+//   for (let i = 10; i < 36; i++) {
+//     options.push({
+//       value: i.toString(36) + i,
+//       label: i.toString(36) + i,
+//     });
+//   }
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
@@ -74,6 +84,7 @@ const InnerDashboard = () => {
             <div className='col-lg-4 chartbox'>
               <div className='StackedChart '>
                 <span className='selectionHeading'>Employees by Status</span>
+                  <p className='para text-center'><BiSolidDoughnutChart  /> ACTIVE</p>
                 <PieChart />
               </div>
             </div>
