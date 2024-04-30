@@ -6,7 +6,7 @@ import { Button, Divider, Space, Tooltip } from 'antd';
 const EmpSalaryDepart = () => {
     return (
         <>
-                    <div className="col-lg-6 emp_salary_depart_table">
+                    <div className="col-lg-6 emp_salary_depart_table mt-3">
                         <h5 className='emp_salary_depart_table_head'>Employee Salary by department</h5>
                         <table className=''>
                             <tr>

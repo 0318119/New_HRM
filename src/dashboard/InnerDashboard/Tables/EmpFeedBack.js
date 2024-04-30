@@ -88,7 +88,7 @@ const EmpFeedBack = () => {
     return (
         <>
 
-            <div className="col-lg-6">
+            <div className="col-lg-6 mt-3">
                 <div className='feedbackBox'>
                 <h5>Employee feedback details</h5>
                 <Table

@@ -4,7 +4,7 @@ import CanvasJSReact from '@canvasjs/react-charts';
  
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-class HorizontalCharts extends Component {
+class HorizontalCharts2 extends Component {
 	render() {
 		const options = {
 			animationEnabled: true,
@@ -21,7 +21,8 @@ class HorizontalCharts extends Component {
 			},
 			data: [{
 				type: "bar",
-				color: "#CDC833",
+				color: "#6c1348",
+				
 				dataPoints: [
 					{ y:  2200000000, label: "Administration" },
 					{ y:  1800000000, label: "Marketing" },
@@ -49,4 +50,4 @@ class HorizontalCharts extends Component {
 		return CanvasJS.formatNumber(e.value / Math.pow(1000, order)) + suffix;
 	}
 }
-export default HorizontalCharts;  
+export default HorizontalCharts2;  

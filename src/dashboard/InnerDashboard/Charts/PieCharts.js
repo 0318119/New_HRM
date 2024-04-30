@@ -60,6 +60,7 @@ export default function PieCharts() {
   );
 
   return (
+
     <PieChart width={400} height={210}>
       <Pie
         activeIndex={activeIndex}
@@ -68,7 +69,7 @@ export default function PieCharts() {
         cx={200}
         cy={100}
         innerRadius={60}
-        // outerRadius={80}
+        outerRadius={100}
         fill="#2fb6c5"
         dataKey="value"
         onMouseEnter={onPieEnter}
