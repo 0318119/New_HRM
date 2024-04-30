@@ -116,7 +116,8 @@ function TAShortsCut() {
           <div className="col-lg-3 mt-5">
             <Link to={'/InnerDashboard'} className="dashBoxes">
               <RxDashboard_ico />
-              <span style={{color: "white"}}>Attendance</span>
+              {/* Attendance */}
+              <span style={{color: "white"}}>Dashboard</span>
             </Link>
           </div>
           <div className="col-lg-3 mt-5">
