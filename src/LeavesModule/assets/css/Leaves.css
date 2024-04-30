@@ -1,0 +1,36 @@
+/* ============================ */
+.empLeavesBgColor{
+    background: #F7F5F5;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 40px;
+}
+.empLeavesBgColor .empLeavesTableHead{
+    display: flex;
+    justify-content: space-between;
+}
+
+.empLeavesHalfDayFlag{
+    position: relative;
+}
+.empLeavesHalfDayFlag .half_day{
+    flex-direction: row;
+    position: absolute;
+    top: 0;
+    left: 22%;
+}
+
+/* =============================== */
+
+@media screen and (max-width:575px){
+    .empLeavesHalfDayFlag .half_day {
+        left: auto;
+        right: 20%;
+    }
+}
+@media screen and (max-width:420px){
+    .empLeavesHalfDayFlag .half_day {
+        left: auto;
+        right: 10px;
+    }
+}

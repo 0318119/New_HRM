@@ -1,0 +1,55 @@
+.maringClass{
+    margin-top: 80px;
+}
+.maringClass2{
+    /* margin-top: 10px; */
+}
+.ConfirmationFlexBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ConfirmationFlexBox .ConfirmationsearchBox{
+    display: flex;
+    align-items: center;
+}
+.ConfirmationFlexBox .ConfirmationsearchBox input{
+    min-width: 300px;
+}
+.formBoxCostCenter{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+.costCenterBtnBox{
+    display: flex;
+    justify-content: end;
+}
+.formBoxCostCenter div{
+    width: 50%;
+}
+
+
+@media screen and (max-width: 768px){
+    .ConfirmationFlexBox{
+        flex-wrap: wrap;
+    }
+    .ConfirmationFlexBox .ConfirmationsearchBox {
+        width: 100%;
+    }
+    .ConfirmationFlexBox .ConfirmationsearchBox #inputBox{
+        width: 100%;
+    }
+    .ConfirmationFlexBox .ConfirmationsearchBox #inputBox input{
+        min-width: unset !important;
+    }
+}
+@media screen and (max-width: 480px){
+    .formBoxCostCenter div{
+        width: 100%;
+    }
+    .ConfirmationFlexBox .ConfirmationsearchBox {
+        flex-wrap: wrap;
+    }
+}

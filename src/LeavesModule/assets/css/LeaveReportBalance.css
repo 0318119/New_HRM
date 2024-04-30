@@ -1,0 +1,10 @@
+
+.leaveReportBalanceBox > h5{
+    padding-left: 10px
+}
+.leaveReportBalanceBox{
+    background: #F7F5F5;
+    padding: 30px 20px;
+    border-radius: 10px;
+    margin-top: 80px;
+}

@@ -1,0 +1,32 @@
+.loginSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #80808024;
+}
+
+.loginSection .loginForm{
+    background: #014f86;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 29px 34px 10px #c1b1b142;
+}
+
+.loginSection .loginForm .loginLabel{
+    color: white;
+}
+
+.loginSection .loginForm .loginBtnBg{
+    background: white;
+    color: black;
+    font-weight: 500;
+}
+.loginSection .loginForm img{
+    height: 50px;
+    margin: auto;
+    display: block;
+    margin-bottom: 40px;
+    width: 140px;
+    object-fit: cover;
+}
