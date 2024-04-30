@@ -57,3 +57,31 @@ h5.emp_salary_depart_table_head{
     text-align: center;
     padding: 0 !important;
 }
+.chartSelection{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 2px 11px -4px rgba(0, 0, 0, 0.1);
+    padding: 10px !important;
+    border-radius: 8px ;
+
+}
+
+.ChartsRow{
+    display: flex;
+    margin-top: 75px;
+}
+.chartbox{
+}
+
+.ChartsRow2{
+    display: flex;
+}
+.selectionHeading{
+ font-size: 14px;    
+ font-weight: 600;
+}
+.StackedChart{
+    padding: 10px !important;
+    margin-top: 5px;
+    box-shadow: 0px 2px 11px -4px rgba(0, 0, 0, 0.1);
+}

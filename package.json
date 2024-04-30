@@ -5,6 +5,9 @@
   "private": true,
   "dependencies": {
     "@ant-design/plots": "^1.2.5",
+    "@canvasjs/charts": "^3.8.4",
+    "@canvasjs/react-charts": "^1.0.2",
+    "@canvasjs/stockcharts": "^1.8.4",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.2",
