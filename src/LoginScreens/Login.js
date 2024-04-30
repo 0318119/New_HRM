@@ -118,7 +118,7 @@ function Login({
                     errors={errors}
                     control={control}
                   />
-                  <FormSelect
+                  {/* <FormSelect
                     errors={errors}
                     labelClass={"loginLabel"}
                     control={control}
@@ -129,7 +129,7 @@ function Login({
                       value: items?.company_code,
                       label: items?.company_name
                     }))}
-                  />
+                  /> */}
                   <PrimaryButton type={'submit'} loading={isLoading} title="Submit" btnClass={"loginBtnBg"} />
                 </form>
               </div>
