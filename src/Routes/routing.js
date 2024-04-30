@@ -4,6 +4,7 @@ import "../../src/Assets/css/bootstrap.css";
 import '../../src/Assets/css/main.css'
 import Login from '../LoginScreens/Login';
 import Dashboard from '../dashboard/dashboard';
+import InnerDashboard from '../dashboard/InnerDashboard.js';
 import Appointment from '../TransactionAppointment/Appointment';
 import TAPersonalform from '../TransactionAppointForm/TAPersonalform';
 import TAShortsCut from '../TransactionAppointForm/TAShortsCut'
@@ -134,7 +135,8 @@ const routing = () => {
             localStorage.getItem('access_token') !== null &&
             localStorage.getItem('access_token') !== "" ?
             <>
-              <Route path="/dashboard" element={<Dashboard />} />
+              {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+              <Route path="/InnerDashboard" element={<InnerDashboard />} />
               <Route path="/Appointment" element={<Appointment />} />
               <Route path="/TAPersonalform" element={<TAPersonalform />} />
               <Route path="/TAShortsCut" element={<TAShortsCut />} />

@@ -114,7 +114,7 @@ function TAShortsCut() {
         <hr />
         <div className="row justify-content-center">
           <div className="col-lg-3 mt-5">
-            <Link to={'/Dashboard'} className="dashBoxes">
+            <Link to={'/InnerDashboard'} className="dashBoxes">
               <RxDashboard_ico />
               <span style={{color: "white"}}>Attendance</span>
             </Link>
