@@ -135,7 +135,7 @@ const routing = () => {
             localStorage.getItem('access_token') !== null &&
             localStorage.getItem('access_token') !== "" ?
             <>
-              {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/InnerDashboard" element={<InnerDashboard />} />
               <Route path="/Appointment" element={<Appointment />} />
               <Route path="/TAPersonalform" element={<TAPersonalform />} />
@@ -166,7 +166,7 @@ const routing = () => {
               <Route path="/Employee_Master" element={<Employee_Master />} />
               <Route path="/Confirmation" element={<Confirmation />} />
               <Route path="/ConfirmationWaiting" element={<ConfirmationWaiting />} />
-              <Route path="/Increment" element={<Increment />} />
+              <Route path="/Increment_Report" element={<Increment />} />
               <Route path="/Get_Attendance" element={<Get_Attendance />} />
               <Route path="/Attendance_Check" element={<Attendance_Check />} />
               <Route path="/Manual_Leave_Deletio" element={<Manual_Leave_Deletio />} />
@@ -204,7 +204,7 @@ const routing = () => {
               <Route path='/Service_Length_Report' element={<ServiceLengthReport />} />
               <Route path='/Employee_Education_Report' element={<TranEducationReport />} />
               <Route path='/Employee_Experience_Report' element={<Employee_Experience_Report />} />
-              <Route path='/RetirementSeparationReport' element={<RetirementSeparationReport />} />
+              <Route path='/Retirement_Separation_Report' element={<RetirementSeparationReport />} />
               <Route path="/payroll/oneTimeAllowance" element={<OneTimeAllowance />} />
               <Route path="/payroll/FixedAllowance" element={<FixedAllowance />} />
               <Route path="/payroll/CashAllowance" element={<CashAllowance />} />
@@ -212,7 +212,7 @@ const routing = () => {
               <Route path="/payroll/fixedDeduction" element={<FixedDeduction />} />
               <Route path="/payroll/advancesalary" element={<AdvanceSalary />} />
               <Route path="/payroll/advanceSalaryInstallment" element={<AdvanceSalaryInstallment />} />
-              <Route path="/payroll/salaryHold" element={<SalaryHold />} />
+              <Route path="/Salary_OnHold_Report" element={<SalaryHold />} />
               <Route path="/payroll/payrollUpload" element={<PayrollUpload />} />
               <Route path="/payroll/hrStop" element={<HrStop />} />
               <Route path="/payroll/hrRelease" element={<HrRelease />} />
@@ -248,7 +248,7 @@ const routing = () => {
               <Route path="/ManualAttendHistory" element={<ManualAttendHistory />} />
               <Route path='/Bank_Letter_Report' element={<Bank_Letter_Report />} />
               <Route path='/Paysheet_Report' element={<Paysheet_Report />} />
-              <Route path='/Confirmation_Extension' element={<Confirmation_Extension />} />
+              <Route path='/Confirmation_Extension_Report' element={<Confirmation_Extension />} />
               <Route path="/ConfirmExtensionFormProcessing" element={<ConfirmExtensionFormProcessing />} />
               <Route path="/PaySlip_Employee_Wise" element={<PaySlip_Employee_Wise />} />
               <Route path="/PaySlip_Employee_WiseForm" element={<PaySlip_Employee_WiseForm />} />

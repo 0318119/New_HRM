@@ -40,7 +40,7 @@ const EmpFeedBack = () => {
         {
             key: '1',
             Id: 'S011',
-            Emp_Name: "Hanna Moos",
+            Emp_Name: "Rehman",
             team: "Finance",
             job: "Senior Consultant",
             rating: "4.0",
@@ -49,7 +49,7 @@ const EmpFeedBack = () => {
         {
             key: '2',
             Id: 'S011',
-            Emp_Name: "Hanna Moos",
+            Emp_Name: "Mustufa",
             team: "Finance",
             job: "Senior Consultant",
             rating: "4.0",
@@ -58,7 +58,7 @@ const EmpFeedBack = () => {
         {
             key: '3',
             Id: 'S011',
-            Emp_Name: "Hanna Moos",
+            Emp_Name: "Abdullah",
             team: "Finance",
             job: "Senior Consultant",
             rating: "4.0",
@@ -67,7 +67,7 @@ const EmpFeedBack = () => {
         {
             key: '4',
             Id: 'S011',
-            Emp_Name: "Hanna Moos",
+            Emp_Name: "Arbab",
             team: "Finance",
             job: "Senior Consultant",
             rating: "4.0",
@@ -76,7 +76,7 @@ const EmpFeedBack = () => {
         {
             key: '5',
             Id: 'S011',
-            Emp_Name: "Hanna Moos",
+            Emp_Name: "Aqib",
             team: "Finance",
             job: "Senior Consultant",
             rating: "4.0",
