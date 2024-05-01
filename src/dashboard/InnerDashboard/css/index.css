@@ -31,6 +31,13 @@ h5.emp_salary_depart_table_head {
     white-space: pre;
 }
 
+.para{
+    text-align: center;
+    font-size: 16px;
+    color: #014F86;
+    font-weight: 600 ;
+}
+
 /* EMP FEEDBACK TABLES CSS =================== */
 .feedbackBox {
     padding: 10px;
@@ -93,5 +100,4 @@ h5.emp_salary_depart_table_head {
     padding: 10px !important;
     margin-top: 5px;
     box-shadow: 2px 1px 12px #8080801f;
-    height: 445px;
 }
