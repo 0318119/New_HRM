@@ -84,7 +84,7 @@ const InnerDashboard = () => {
             </div>
             <div className='col-lg-4 chartbox'>
               <div className='StackedChart '>
-                <span className='selectionHeading'>Employees by Status</span>
+                  <span className='selectionHeading'>Employees by Status</span>
                   <p className='para text-center'><BiSolidDoughnutChart  /> ACTIVE</p>
                 <PieChart />
               </div>

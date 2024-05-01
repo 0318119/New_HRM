@@ -6,6 +6,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class StackedVerticleChart extends Component {
 	render() {
 		const options = {
+			
             height: 250,
 			title: {
 				// text: "Popular Majors Opted by Women & Men"

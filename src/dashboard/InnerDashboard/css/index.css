@@ -17,6 +17,12 @@ h5.emp_salary_depart_table_head {
     background: transparent;
     font-size: 13px;
 }
+.emp_salary_depart_table{
+    overflow-x: scroll;
+}
+
+
+
 
 .emp_salary_depart_table table tr td {
     background: rgb(125, 175, 179);
@@ -100,4 +106,5 @@ h5.emp_salary_depart_table_head {
     padding: 10px !important;
     margin-top: 5px;
     box-shadow: 2px 1px 12px #8080801f;
+
 }
