@@ -212,8 +212,8 @@ const routing = () => {
               <Route path="/payroll/fixedDeduction" element={<FixedDeduction />} />
               <Route path="/Advance_Salary" element={<AdvanceSalary />} />
               <Route path="/Advance_Salary_Installment" element={<AdvanceSalaryInstallment />} />
-              <Route path="/Salary_OnHold_Report" element={<SalaryHold />} />
-              <Route path="/payroll/payrollUpload" element={<PayrollUpload />} />
+              <Route path="/Salary_Hold" element={<SalaryHold />} />
+              <Route path="/Upload_Payroll_Data" element={<PayrollUpload />} />
               <Route path="/payroll/hrStop" element={<HrStop />} />
               <Route path="/payroll/hrRelease" element={<HrRelease />} />
               <Route path="/payroll/undoPayrollCalculation" element={<UndoPayrollCalculation />} />
@@ -225,7 +225,7 @@ const routing = () => {
               <Route path="/payroll/addPayrollMethod" element={<AddPayrollMethod />} />
               <Route path="/Attendance_Excel_Report" element={<AddPayrollMethodPdf />} />
               <Route path="/payroll/report/taxReport" element={<TaxReport />} />
-              <Route path="/payroll/report/SalaryOnHold" element={<SalaryOnHold />} />
+              <Route path="Salary_OnHold_Report" element={<SalaryOnHold />} />
               <Route path="/Earning_Master" element={<Earning_Master />} />
               <Route path="/JV_Codes" element={<JV_Code />} />
               <Route path="IncomeTax_Columns" element={<Income_Tax />} />
@@ -257,6 +257,16 @@ const routing = () => {
             <>
               <Route path="*" element={<NotFound />} />
             </>
+        }
+        {
+          <>
+           {
+              localStorage.getItem('access_token') !== undefined &&
+              localStorage.getItem('access_token') !== null &&
+              localStorage.getItem('access_token') !== ""  ?
+              <Route path="*" element={<NotFound />} /> : null
+            }
+          </>
         }
 
         {
