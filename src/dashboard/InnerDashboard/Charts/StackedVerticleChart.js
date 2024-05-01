@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CanvasJSReact from '@canvasjs/react-charts';
-//var CanvasJSReact = require('@canvasjs/react-charts');
- 
+
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class StackedVerticleChart extends Component {
@@ -10,7 +9,7 @@ class StackedVerticleChart extends Component {
 		this.toggleDataSeries = this.toggleDataSeries.bind(this);
 	}
 	toggleDataSeries(e) {
-		if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
 			e.dataSeries.visible = false;
 		}
 		else {
@@ -34,7 +33,7 @@ class StackedVerticleChart extends Component {
 			toolTip: {
 				shared: true
 			},
-			legend:{
+			legend: {
 				cursor: "pointer",
 				itemclick: this.toggleDataSeries
 			},
@@ -52,12 +51,11 @@ class StackedVerticleChart extends Component {
 			]
 		}
 		return (
-		<div>
-			<CanvasJSChart options = {options}
-				onRef={ref => this.chart = ref}
-			/>
-			{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
-		</div>
+			<div>
+				<CanvasJSChart options={options}
+					onRef={ref => this.chart = ref}
+				/>
+			</div>
 		);
 	}
 }

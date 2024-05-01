@@ -14,6 +14,7 @@ import NiddlePie3 from './InnerDashboard/Charts/NiddlePie3';
 import NiddlePie4 from './InnerDashboard/Charts/NiddlePie4';
 import { CiCircleInfo } from "react-icons/ci";
 import HorizontalCharts from './InnerDashboard/Charts/HorizontalCharts';
+import HorizontalCharts2 from './InnerDashboard/Charts/HorizontalCharts2'
 
 
 const InnerDashboard = () => {
@@ -83,40 +84,40 @@ const InnerDashboard = () => {
                 <StackedVerticleChart />
               </div>
             </div>
-            <div className='col-lg-3 chartbox'>
+            <div className='col-lg-3 mt-3 chartbox'>
               <div className='StackedChart '>
-                <span className='selectionHeading'>Employees by Age group <CiCircleInfo /></span>
+                <span className='selectionHeading'>Employee Retention Rate <CiCircleInfo /></span>
                 <NiddlePie1 />
               </div>
             </div>
-            <div className='col-lg-3 chartbox'>
+            <div className='col-lg-3 mt-3 chartbox'>
               <div className='StackedChart '>
-                <span className='selectionHeading'>Employees by Age group <CiCircleInfo /></span>
+                <span className='selectionHeading'>Employee Net Promoter Score (NPS)<CiCircleInfo /></span>
                 <NiddlePie2 />
               </div>
             </div>
-            <div className='col-lg-3 chartbox'>
+            <div className='col-lg-3 mt-3 chartbox'>
               <div className='StackedChart '>
-                <span className='selectionHeading'>Employees by Age group <CiCircleInfo /></span>
+                <span className='selectionHeading'>Employee Turnover Ratio<CiCircleInfo /></span>
                 <NiddlePie3 />
               </div>
             </div>
-            <div className='col-lg-3 chartbox'>
-              <div className='StackedChart '>
-                <span className='selectionHeading'>Employees by Age group <CiCircleInfo /></span>
+            <div className='col-lg-3 mt-3 chartbox'>
+              <div className='StackedChart'>
+                <span className='selectionHeading'>Absentee Rate<CiCircleInfo /></span>
                 <NiddlePie4 />
               </div>
             </div>
             <EmpSalaryDepart />
-            <div className='col-lg-6 chartbox'>
+            <div className='col-lg-6 mt-3 chartbox'>
               <div className='StackedChart '>
                 <span className='selectionHeading'>Productivity Rate by Department</span>
-                <HorizontalCharts />
+                <HorizontalCharts2 />
               </div>
             </div>
-            <div className='col-lg-6 chartbox'>
-              <div className='StackedChart '>
-                <span className='selectionHeading'>Productivity Rate by Department</span>
+            <div className='col-lg-6 mt-3 chartbox'>
+              <div className='StackedChart'>
+                <span className='selectionHeading'>Overall Labor Effectiveness (OLE)</span>
                 <HorizontalCharts />
               </div>
             </div>
