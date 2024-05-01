@@ -13,10 +13,10 @@ import logo from '../Assets/Images/hrm-logo.png'
 
 function Login({
   Red_Login,
-  GET_ALL_COMPANY_DATA,
+  // GET_ALL_COMPANY_DATA,
   Login
 }) {
-  const companies = Red_Login?.COMPANIES?.[0]?.res
+  // const companies = Red_Login?.COMPANIES?.[0]?.res
   const [isLoading, setLoading] = useState(false)
   const scheme = yup.object().shape({
     Emp_code: yup.string().required("Emp_code is required"),
@@ -77,15 +77,15 @@ function Login({
   }
 
 
-  useEffect(() => {
-    GET_ALL_COMPANY_DATA()
-  }, [])
+  // useEffect(() => {
+  //   GET_ALL_COMPANY_DATA()
+  // }, [])
 
-  useEffect(() => {
-    if (companies?.message == "failed" || companies?.messsage == "failed") {
-      message.error(companies?.message || companies?.messsage)
-    }
-  }, [companies])
+  // useEffect(() => {
+  //   if (companies?.message == "failed" || companies?.messsage == "failed") {
+  //     message.error(companies?.message || companies?.messsage)
+  //   }
+  // }, [companies])
 
   return (
     <>

@@ -50,7 +50,7 @@ const EmpTraining = () => {
         {
             key: '1',
             Id: 'S001',
-            name: "Alejandra Camino",
+            name: "Hamza",
             CompletionRate: "94%",
             skill: "79%",
             learning: "87%",
@@ -61,7 +61,7 @@ const EmpTraining = () => {
         {
             key: '2',
             Id: 'S001',
-            name: "Alejandra Camino",
+            name: "Rehman",
             CompletionRate: "94%",
             skill: "79%",
             learning: "87%",
@@ -72,7 +72,7 @@ const EmpTraining = () => {
         {
             key: '3',
             Id: 'S001',
-            name: "Alejandra Camino",
+            name: "Mustufa",
             CompletionRate: "94%",
             skill: "79%",
             learning: "87%",
@@ -83,7 +83,7 @@ const EmpTraining = () => {
         {
             key: '4',
             Id: 'S001',
-            name: "Alejandra Camino",
+            name: "Arbab",
             CompletionRate: "94%",
             skill: "79%",
             learning: "87%",
@@ -94,7 +94,7 @@ const EmpTraining = () => {
         {
             key: '5',
             Id: 'S001',
-            name: "Alejandra Camino",
+            name: "Ahemad",
             CompletionRate: "94%",
             skill: "79%",
             learning: "87%",

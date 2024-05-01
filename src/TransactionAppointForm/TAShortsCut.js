@@ -102,13 +102,13 @@ function TAShortsCut() {
                   marginRight: "5px"
                 }}><b>Attendance excel report</b></Link> : null
             } */}
-            <Link to="/Get_Attendance" className="text-dark" style={{
+            {/* <Link to="/Get_Attendance" className="text-dark" style={{
               background: "rgb(229 221 221)",
               padding: "6px 6px",
               borderRadius: "4px",
               fontSize: "14px",
               textDecoration: "none",
-            }}><b>Attendance report</b></Link>
+            }}><b>Attendance report</b></Link> */}
           </div>
         </div>
         <hr />
@@ -118,6 +118,13 @@ function TAShortsCut() {
               <RxDashboard_ico />
               {/* Attendance */}
               <span style={{color: "white"}}>Dashboard</span>
+            </Link>
+          </div>
+          <div className="col-lg-3 mt-5">
+            <Link to={'/Dashboard'} className="dashBoxes">
+              <RxDashboard_ico />
+              {/* Attendance */}
+              <span style={{color: "white"}}>Attendance</span>
             </Link>
           </div>
           <div className="col-lg-3 mt-5">
