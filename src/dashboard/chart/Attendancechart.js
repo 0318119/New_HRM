@@ -118,13 +118,14 @@ export default function Attendancechart() {
   };
 
   const labels = getAttendData?.map((items) => items.Date + " " + items.Month);
+  console.log("getAttendData",getAttendData)
   const data = {
     labels,
     datasets: [
       {
         id: 1,
         label: "Present",
-        data: getAttendData?.map((items) => items?.Attendance_Status == 'Present' && items?.Remarks == "On Time" ? items.Progress : null),
+        data: getAttendData?.map((items) => items?.Attendance_Status == 'Present' ? items.Progress : null),
         backgroundColor: "#1587E7",
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 2,
@@ -132,7 +133,7 @@ export default function Attendancechart() {
       {
         id: 2,
         label: 'Absent',
-        data: getAttendData?.map((items) => items?.Attendance_Status == 'Absent' && items?.Remarks == "Late" ? 5.10 : null),
+        data: getAttendData?.map((items) => items?.Attendance_Status == 'Absent' ? 5.10 : null),
         backgroundColor: "red",
         borderColor: '#bd1b1b',
         borderWidth: 2,
@@ -140,7 +141,7 @@ export default function Attendancechart() {
       {
         id: 3,
         label: 'Late',
-        data: getAttendData?.map((items) => items?.Attendance_Status == 'Present' && items?.Remarks == "Late" ? items?.Progress : null),
+        data: getAttendData?.map((items) => items?.Attendance_Status == 'Late' ? items?.Progress : null),
         backgroundColor: "#d7d730",
         borderColor: '#cfcf09',
         borderWidth: 2,

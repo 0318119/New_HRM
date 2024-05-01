@@ -207,11 +207,11 @@ const routing = () => {
               <Route path='/Retirement_Separation_Report' element={<RetirementSeparationReport />} />
               <Route path="/payroll/oneTimeAllowance" element={<OneTimeAllowance />} />
               <Route path="/payroll/FixedAllowance" element={<FixedAllowance />} />
-              <Route path="/payroll/CashAllowance" element={<CashAllowance />} />
+              <Route path="/Cash_Award_Allowance" element={<CashAllowance />} />
               <Route path="/payroll/oneTimeDeduction" element={<OneTimeDeduction />} />
               <Route path="/payroll/fixedDeduction" element={<FixedDeduction />} />
-              <Route path="/payroll/advancesalary" element={<AdvanceSalary />} />
-              <Route path="/payroll/advanceSalaryInstallment" element={<AdvanceSalaryInstallment />} />
+              <Route path="/Advance_Salary" element={<AdvanceSalary />} />
+              <Route path="/Advance_Salary_Installment" element={<AdvanceSalaryInstallment />} />
               <Route path="/Salary_OnHold_Report" element={<SalaryHold />} />
               <Route path="/payroll/payrollUpload" element={<PayrollUpload />} />
               <Route path="/payroll/hrStop" element={<HrStop />} />
