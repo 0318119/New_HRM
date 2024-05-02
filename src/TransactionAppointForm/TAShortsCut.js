@@ -6,6 +6,7 @@ import { BsPlus as Plus_ico } from 'react-icons/bs'
 import { RxDashboard as RxDashboard_ico } from 'react-icons/rx'
 import { Space, Table, } from 'antd';
 import { message } from 'antd';
+import { RiOrganizationChart } from "react-icons/ri";
 import baseUrl from "../config.json";
 const config = require('../config.json')
 
@@ -133,12 +134,12 @@ function TAShortsCut() {
               <span style={{color: "white"}}>Leave</span>
             </Link>
           </div>
-          {/* <div className="col-lg-3 mt-5">
-            <Link to="/payroll/report/taxReport" className="dashBoxes">
-              <FaListAlt />
-              <span>Tax Slip</span>
+          <div className="col-lg-3 mt-5">
+            <Link to="/flow/DesignationsFlowChart" className="dashBoxes">
+              <RiOrganizationChart />
+              <span style={{color: "white"}}>Orginazation Chart</span>
             </Link>
-          </div> */}
+          </div>
           {/* <div className="col-lg-3 mt-5">
             <Link to="/Pay/PaySlip" className="dashBoxes">
               <RiFileListFill />
