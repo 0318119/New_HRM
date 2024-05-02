@@ -225,7 +225,7 @@ const routing = () => {
               <Route path="/payroll/addPayrollMethod" element={<AddPayrollMethod />} />
               <Route path="/Attendance_Excel_Report" element={<AddPayrollMethodPdf />} />
               <Route path="/payroll/report/taxReport" element={<TaxReport />} />
-              <Route path="Salary_OnHold_Report" element={<SalaryOnHold />} />
+              <Route path="/Salary_OnHold_Report" element={<SalaryOnHold />} />
               <Route path="/Earning_Master" element={<Earning_Master />} />
               <Route path="/JV_Codes" element={<JV_Code />} />
               <Route path="IncomeTax_Columns" element={<Income_Tax />} />
@@ -243,7 +243,7 @@ const routing = () => {
               <Route path="/TACheckListForm" element={<TACheckListForm />} />
               <Route path="/Access_Control" element={<Access_Control />} />
               <Route path='/Date_Of_Birth_Inquiry_Report' element={<Date_Of_Birth_Inquiry_Report />} />
-              <Route path="/OfferLeter" element={<OfferLeter />} />
+              <Route path="/Appointment_Letter" element={<OfferLeter />} />
               <Route path="/Manual_Attendance" element={<ManualAttendance />} />
               <Route path="/ManualAttendHistory" element={<ManualAttendHistory />} />
               <Route path='/Bank_Letter_Report' element={<Bank_Letter_Report />} />
