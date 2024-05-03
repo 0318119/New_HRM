@@ -135,8 +135,7 @@ const routing = () => {
             localStorage.getItem('access_token') !== null &&
             localStorage.getItem('access_token') !== "" ?
             <>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/InnerDashboard" element={<InnerDashboard />} />
+               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/Appointment" element={<Appointment />} />
               <Route path="/TAPersonalform" element={<TAPersonalform />} />
               <Route path="/TAShortsCut" element={<TAShortsCut />} />
@@ -166,7 +165,7 @@ const routing = () => {
               <Route path="/Employee_Master" element={<Employee_Master />} />
               <Route path="/Confirmation" element={<Confirmation />} />
               <Route path="/ConfirmationWaiting" element={<ConfirmationWaiting />} />
-              <Route path="/Increment_Report" element={<Increment />} />
+              <Route path="/Increment" element={<Increment />} />
               <Route path="/Get_Attendance" element={<Get_Attendance />} />
               <Route path="/Attendance_Check" element={<Attendance_Check />} />
               <Route path="/Manual_Leave_Deletio" element={<Manual_Leave_Deletio />} />
@@ -205,32 +204,11 @@ const routing = () => {
               <Route path='/Employee_Education_Report' element={<TranEducationReport />} />
               <Route path='/Employee_Experience_Report' element={<Employee_Experience_Report />} />
               <Route path='/Retirement_Separation_Report' element={<RetirementSeparationReport />} />
-              <Route path="/payroll/oneTimeAllowance" element={<OneTimeAllowance />} />
-              <Route path="/payroll/FixedAllowance" element={<FixedAllowance />} />
-              <Route path="/Cash_Award_Allowance" element={<CashAllowance />} />
-              <Route path="/payroll/oneTimeDeduction" element={<OneTimeDeduction />} />
-              <Route path="/payroll/fixedDeduction" element={<FixedDeduction />} />
-              <Route path="/Advance_Salary" element={<AdvanceSalary />} />
-              <Route path="/Advance_Salary_Installment" element={<AdvanceSalaryInstallment />} />
+              <Route path="Advance_Salary_Installment" element={<AdvanceSalaryInstallment />} />
               <Route path="/Salary_Hold" element={<SalaryHold />} />
               <Route path="/Upload_Payroll_Data" element={<PayrollUpload />} />
-              <Route path="/payroll/hrStop" element={<HrStop />} />
-              <Route path="/payroll/hrRelease" element={<HrRelease />} />
-              <Route path="/payroll/undoPayrollCalculation" element={<UndoPayrollCalculation />} />
-              <Route path="/payroll/closingPayrollMonth" element={<ClosingPayrollMonth />} />
-              <Route path="/payroll/addLoans" element={<AddLoans />} />
-              <Route path="/payroll/addallowance" element={<AddAllowance />} />
-              <Route path="/payroll/addDeduction" element={<AddDeduction />} />
-              <Route path="/payroll/addPayroll" element={<AddPayroll />} />
               <Route path="/payroll/addPayrollMethod" element={<AddPayrollMethod />} />
-              <Route path="/Attendance_Excel_Report" element={<AddPayrollMethodPdf />} />
-              <Route path="/payroll/report/taxReport" element={<TaxReport />} />
-              <Route path="/Salary_OnHold_Report" element={<SalaryOnHold />} />
               <Route path="/Earning_Master" element={<Earning_Master />} />
-              <Route path="/JV_Codes" element={<JV_Code />} />
-              <Route path="IncomeTax_Columns" element={<Income_Tax />} />
-              <Route path="Bank_Branches" element={<Bank_Branches />} />
-              <Route path="/Payroll_Master" element={<Payroll_Master />} />
               <Route path="/Tax_Structure" element={<TaxStructure />} />
               <Route path="/Bank" element={<Bank />} />
               <Route path="/Outstanding_Recoveries" element={<OutstandingRecoveries />} />
@@ -243,15 +221,42 @@ const routing = () => {
               <Route path="/TACheckListForm" element={<TACheckListForm />} />
               <Route path="/Access_Control" element={<Access_Control />} />
               <Route path='/Date_Of_Birth_Inquiry_Report' element={<Date_Of_Birth_Inquiry_Report />} />
-              <Route path="/Appointment_Letter" element={<OfferLeter />} />
+              <Route path="/OfferLeter" element={<OfferLeter />} />
               <Route path="/Manual_Attendance" element={<ManualAttendance />} />
               <Route path="/ManualAttendHistory" element={<ManualAttendHistory />} />
-              <Route path='/Bank_Letter_Report' element={<Bank_Letter_Report />} />
+              <Route path='/Employee_Bank_Account_Detail_Report' element={<Bank_Letter_Report />} />
               <Route path='/Paysheet_Report' element={<Paysheet_Report />} />
-              <Route path='/Confirmation_Extension_Report' element={<Confirmation_Extension />} />
+              <Route path='/Confirmation_Extension' element={<Confirmation_Extension />} />
               <Route path="/ConfirmExtensionFormProcessing" element={<ConfirmExtensionFormProcessing />} />
-              <Route path="/PaySlip_Employee_Wise" element={<PaySlip_Employee_Wise />} />
-              <Route path="/PaySlip_Employee_WiseForm" element={<PaySlip_Employee_WiseForm />} />
+              <Route path="/IncomeTax_Columns" element={<Income_Tax />} />
+              <Route path="/JV_Codes" element={<JV_Code />} />
+              <Route path="/Bank_Branches" element={<Bank_Branches />} />
+
+
+              {/* PAYROLL */}
+              <Route path="/Cash_Award_Allowance" element={<CashAllowance />} />
+              <Route path="/Stop_HR_Entry" element={<HrStop />} />
+              <Route path="/One_Time_Allowance" element={<OneTimeAllowance />} />
+              <Route path="/Fixed_Allowance" element={<FixedAllowance />} />
+              <Route path="One_Time_Deduction" element={<OneTimeDeduction />} />
+              <Route path="/Fixed_Deduction" element={<FixedDeduction />} />
+              <Route path="/Hr_Release" element={<HrRelease />} />
+              <Route path="/Advance_Salary" element={<AdvanceSalary />} />
+              <Route path="/Undo_Payroll_Calculation" element={<UndoPayrollCalculation />} />
+              <Route path="/Closing_Payroll_Month" element={<ClosingPayrollMonth />} />
+              <Route path="/Payroll_Master" element={<Payroll_Master />} />
+              <Route path="/Add_Payroll" element={<AddPayroll />} />
+              <Route path="/Attendance_Excel_Report" element={<AddPayrollMethodPdf />} />
+              <Route path="/Tax_Report" element={<TaxReport />} />
+              <Route path="/Range_Wise_Payslip" element={<PaySlip_Employee_Wise />} />
+              <Route path="/PaySlip_(Employee_Wise)" element={<PaySlip_Employee_WiseForm />} />
+              
+
+              {/* PAYROLL SETUP */}
+              <Route path="/Allowances" element={<AddAllowance />} />
+              <Route path="/Deductions" element={<AddDeduction />} />
+              <Route path="/Loans" element={<AddLoans />} />
+              <Route path="/Salary_OnHold_Report" element={<SalaryOnHold />} />
 
             </> :
             <>
