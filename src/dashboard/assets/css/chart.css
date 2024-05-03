@@ -143,3 +143,19 @@
             margin-top: 5px;
         }
 }
+
+.SelectYearAndMonth{
+  display: flex;
+  flex-direction: column;
+}
+
+.goBtn{
+    position: relative;
+    top: 25px;
+    left: 5px;
+}
+
+.goIcon{
+    font-size: 26px;
+    cursor: pointer;
+}

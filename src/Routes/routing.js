@@ -214,10 +214,10 @@ const routing = () => {
               <Route path="/payroll/advanceSalaryInstallment" element={<AdvanceSalaryInstallment />} />
               <Route path="/Salary_OnHold_Report" element={<SalaryHold />} />
               <Route path="/payroll/payrollUpload" element={<PayrollUpload />} />
-              <Route path="/payroll/hrStop" element={<HrStop />} />
-              <Route path="/payroll/hrRelease" element={<HrRelease />} />
-              <Route path="/payroll/undoPayrollCalculation" element={<UndoPayrollCalculation />} />
-              <Route path="/payroll/closingPayrollMonth" element={<ClosingPayrollMonth />} />
+              <Route path="/Stop_HR_Entry" element={<HrStop />} />
+              <Route path="/Release_HR_Entry" element={<HrRelease />} />
+              <Route path="/Undo_Monthly_Payroll_Calculatio" element={<UndoPayrollCalculation />} />
+              <Route path="Closing_Payroll_Month" element={<ClosingPayrollMonth />} />
               <Route path="/payroll/addLoans" element={<AddLoans />} />
               <Route path="/payroll/addallowance" element={<AddAllowance />} />
               <Route path="/payroll/addDeduction" element={<AddDeduction />} />
