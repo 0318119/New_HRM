@@ -48,6 +48,9 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
         setMode(mode);
     };
 
+
+    console.log(Red_Appointment , 'Red_Appointment')
+
     const columns = [
         {
             title: "Sequence No",
@@ -150,13 +153,9 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
             title: "Appointment Letter",
             render: (id) => (
                 <Space size="middle">
-                    <Link
-                        onClick={(e) => {
-                            AppointLetter(id.Sequence_no)
-                        }
-                        }
-                    >
-                        <DownloadingSharpIcon className="List_ico" />
+
+                    <Link onClick={(e) => { AppointLetter(id.Sequence_no)}}>
+                         <DownloadingSharpIcon className="List_ico" /> 
                     </Link>
                 </Space>
             ),
@@ -181,7 +180,7 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
             return response.json();
         }).then(async (response) => {
             if (response.success) {
-                console.log(response.data, 'response')
+                console.log(response, 'response')
                 setAppointData(response.data)
                 GetAppointLetter(id, response?.data)
             }
@@ -202,22 +201,22 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
         ).then((response) => {
             return response.json();
         }).then(async (response) => {
+           
             if (response.success) {
-                messageApi.open({
-                    type: 'success',
-                    content: "Successfully Download",
-                });
+                
+                
+                    messageApi.open({
+                        type: 'success',
+                        content: "Successfully Download",
+                    });
                 setFileData(response.data[0].FileName, DataR);
-
-
-
                 let htmlContent = `<html><body>`;
                 htmlContent += `
             <div style="margin-top:10px; font-size: 20px; display:block;">
-                <div style="font-size:18px">Date: ${DataR?.[0]?.Transaction_Date ? DataR?.[0]?.Transaction_Date : "Not Found"}</div> <br />
+                <div style="font-size:18px">Date: ${DataR?.[0]?.Transaction_Date ? DataR?.[0]?.Transaction_Date.slice(9) : "Not Found"}</div> <br />
                 <div style="font-size:18px">Name: ${DataR?.[0]?.Emp_Name ? DataR?.[0]?.Emp_Name : "Not Found"}</div> <br />
-                <div style="font-size:18px">Address line: ${DataR?.[0]?.emp_address_line1 ? DataR?.[0]?.emp_address_line1 : "Not Found"}</div> <br />
-                <div style="font-size:18px">Address line:  ${DataR?.[0]?.emp_address_line2 ? DataR?.[0]?.emp_address_line2 : "Not Found"}</div> <br />
+                <div style="font-size:18px">Address line 1: ${DataR?.[0]?.emp_address_line1 ? DataR?.[0]?.emp_address_line1 : "Not Found"}</div> <br />
+                <div style="font-size:18px">Address line 2:  ${DataR?.[0]?.emp_address_line2 ? DataR?.[0]?.emp_address_line2 : "Not Found"}</div> <br />
                 <div style="font-size:18px">Contact No: ${DataR?.[0]?.emp_phone ? DataR?.[0]?.emp_phone : "Not Found"}</div><br />
             </div> 
             <div style="text-align: center; font-size: 1px;">
@@ -238,10 +237,9 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
             </tr>
         </thead>
         <tbody>
-    `;
-
+            `;
                 DataR?.forEach((item, index) => {
-                    htmlContent += `
+                htmlContent += `
             <tr>
             <td>${index + 1}</td>
             <td>${item.Allowance_name ? item.Allowance_name : "Not Found"}</td>
@@ -273,7 +271,6 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
             <p>The proposed date of your assuming the responsibility is ${DataR?.[0].ProposedDate ? DataR?.[0].ProposedDate : "Not Found"}  or earlier.</p>
             `;
                 // });
-
                 htmlContent += `
         <p>We are confident that you will play a positive role towards the growth and expansion of Summit Bank Limited-SMBL and look forward to a long and mutually rewarding professional relationship.</p>
         <div style="display: flex; justify-content: space-between; width: 1000px; margin-top:10px;">
@@ -283,7 +280,6 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
                 <span>___________</span>
                 <p></p>Syed Mustufa zaidi <br /> Head of Human Resource Division</p>
             </span>
-            
             <span style="float:right; margin-top:15px;">
                     <span>Accepted:</span>
                     `;
@@ -294,25 +290,23 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
                     `;
                 htmlContent += `
             </span>
-        
         </div>
         </div>
-        
     </body>
     </html>
     `;
-
                 const blob = new Blob([htmlContent], { type: 'application/msword' });
                 saveAs(blob, response?.data?.[0]?.FileName);
+                
             }
-            
-            
             else {
                 messageApi.open({
                     type: 'error',
                     content: response?.message,
                 });
             }
+           
+            
         }).catch((error) => {
             messageApi.open({
                 type: 'error',

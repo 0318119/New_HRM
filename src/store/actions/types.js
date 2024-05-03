@@ -516,3 +516,8 @@ export const GET_TransactionResignation_Confirmation = "GET_TransactionResignati
 export const GET_TransactionResignation_Waiting = "GET_TransactionResignation_Waiting";
 export const GET_TransactionResignation_END = "GET_TransactionResignation_END"; 
 
+
+
+export const GET_SALARY_ON_HOLD_START = "GET_SALARY_ON_START";
+export const GET_SALARY_ON_HOLD = "GET_SALARY_ON_HOLD";
+export const GET_SALARY_ON_HOLD_END = "GET_SALARY_ON_HOLD_END";
