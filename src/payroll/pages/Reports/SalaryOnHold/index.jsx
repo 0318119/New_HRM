@@ -64,7 +64,7 @@ const SalaryOnHold = ({ getSalaryOnHold , Red_SalaryOnHold  }) => {
                </Text>
            })}
               <Text style={{ textAlign: 'center', fontSize: '16', fontWeight: 'bold', marginTop: "20" }}>
-                Employee Attendance PDF
+                Employee Salary Hold
               </Text>
               <View style={{ flexDirection: 'row', borderBottom: '1 solid #000', padding: '10', marginBottom: '5' , marginTop:"50"}}>
                 <Text style={{ width: '50%', textAlign: 'center', fontSize: '10', fontWeight: 'bold' }}>Employee Code</Text>
