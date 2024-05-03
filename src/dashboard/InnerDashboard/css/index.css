@@ -17,7 +17,11 @@ h5.emp_salary_depart_table_head {
     background: transparent;
     font-size: 13px;
 }
-.emp_salary_depart_table{
+/* .emp_salary_depart_table{
+    overflow-x: scroll;
+} */
+
+.overFlow{
     overflow-x: scroll;
 }
 
@@ -107,4 +111,14 @@ h5.emp_salary_depart_table_head {
     margin-top: 5px;
     box-shadow: 2px 1px 12px #8080801f;
 
+}
+
+
+
+/* =====Tabs===== */
+
+
+.DashboradTabs{
+    margin-top: 50px;
+    padding: 25px;
 }
