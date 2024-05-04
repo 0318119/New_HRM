@@ -21,6 +21,9 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
     const [PdfLoader, setPdfLoader] = useState(false)
     const [pdfPassowrd, setPdfPassowrd] = useState()
     const [isPdfData, setPdfData] = useState([])
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear();
     const borderColor = 'black'
 
     useEffect(() => {
@@ -38,12 +41,12 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
         Month: yup.string().required("Month is required"),
         Year: yup.string().required("Year is required"),
     });
-    
     const {
         control,
         formState: { errors },
         handleSubmit,
-        reset
+        reset,
+        setValue
     } = useForm({
         defaultValues: {
             Employee_Id: "",
@@ -286,6 +289,14 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
             borderWidth:1
         },
     });
+
+    useEffect(() => {
+        const selectedEmployee = selectOption?.find(item => item?.Emp_code == localStorage.getItem("Emp_code"));
+        setValue('Employee_Id', selectedEmployee?.Emp_code);
+        setValue('Month', currentMonth);
+        setValue('Year', currentYear);
+    }, [setValue, selectOption, currentMonth, currentYear]);
+
     const submitForm = async (data) => {
         setLoading(true)
         const DataFromApi = await TaxPdfData({

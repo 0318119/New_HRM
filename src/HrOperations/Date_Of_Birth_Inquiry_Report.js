@@ -72,9 +72,7 @@ function Date_Of_Birth_Inquiry_Report({
                     setFormSubmitted(true);
                     setDOBReportData(result?.data);
                     console.log(result?.data, 'ugsfosdj')
-
                     setSelectedEmployee(data.Emp_DOB);
-                    // console.log("data.Emp_DOB", data.Emp_DOB)
                 } else {
                     message.error(result?.message || result?.messsage);
                 }
