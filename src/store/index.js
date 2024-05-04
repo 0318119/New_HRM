@@ -85,6 +85,8 @@ import Red_Paysheet_Report from './reducers/payroll/Paysheet_Report'
 import Red_Confirmation_Extension from './reducers/MasterMaintaince/Confirmation_Extension/index'
 import Red_Increment from './reducers/MasterMaintaince/Increment/index'
 import Red_Transaction_Resignation from './reducers/MasterMaintaince/Transaction_Resignation/index'
+import Red_Payroll_cal from './reducers/payroll/calculation'
+
 
 const reducers = combineReducers({
   Red_Login,
@@ -178,7 +180,8 @@ const reducers = combineReducers({
   Red_Promotion,
   Red_Confirmation_Extension,
   Red_Increment,
-  Red_Transaction_Resignation
+  Red_Transaction_Resignation,
+  Red_Payroll_cal
 
 });
 

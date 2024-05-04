@@ -125,6 +125,7 @@ import Confirmation_Extension from '../Master_Maintaince/components/Confirmation
 import ConfirmExtensionFormProcessing from '../Master_Maintaince/components/ConfirmExtensionFormProcessing.js';
 import PaySlip_Employee_Wise from '../payroll/pages/PaySlip_Employee_Wise.js'
 import PaySlip_Employee_WiseForm from '../payroll/form/transactionPosting/PaySlip_Employee_WiseForm.js'
+import Payroll_monthly_calculation from '../payroll/pages/Calculation/Payroll_monthly_calculation.js';
 
 const routing = () => {
   return (
@@ -209,7 +210,7 @@ const routing = () => {
               <Route path="/Upload_Payroll_Data" element={<PayrollUpload />} />
               <Route path="/payroll/addPayrollMethod" element={<AddPayrollMethod />} />
               <Route path="/Earning_Master" element={<Earning_Master />} />
-              <Route path="/Tax_Structure" element={<TaxStructure />} />
+              <Route path="/Taxation_Structures" element={<TaxStructure />} />
               <Route path="/Bank" element={<Bank />} />
               <Route path="/Outstanding_Recoveries" element={<OutstandingRecoveries />} />
               <Route path='/Payroll_Catery_Access' element={<PayrollCategoryAccess />} />
@@ -256,8 +257,8 @@ const routing = () => {
               <Route path="/Allowances" element={<AddAllowance />} />
               <Route path="/Deductions" element={<AddDeduction />} />
               <Route path="/Loans" element={<AddLoans />} />
+              <Route path="/Payroll_monthly_calculation" element={<Payroll_monthly_calculation />} />
               <Route path="/Salary_OnHold_Report" element={<SalaryOnHold />} />
-
             </> :
             <>
               <Route path="*" element={<NotFound />} />

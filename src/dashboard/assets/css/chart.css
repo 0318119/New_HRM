@@ -43,30 +43,23 @@
     overflow-x: scroll;
     overflow-y: clip;
 }
-
-
 .ChartHeadDetailHeading p {
     color: white !important;
     font-size: 16px;
 }
-
 .ChartAttendance {
     border-bottom: 1px solid white;
     color: white !important;
     font-size: 16px;
 }
-
 .ChartAttendance:hover {
     border-bottom: 1px solid white;
     /* background-color: #f0f3f044; */
 }
-
-
 /* Track styles */
 .ChartCont::-webkit-scrollbar {
     height: 8px;
 }
-
 /* Thumb styles */
 .ChartCont::-webkit-scrollbar-thumb {
     background-color: #014f86;
@@ -82,47 +75,49 @@
 .ChartCont::-webkit-scrollbar-track {
     background-color: transparent;
 }
-
 .toollip {
     background-color: #014f86 !important;
     color: white;
 }
 
-
-
-
-
-
-
-
-
-
-
+.chart_filter_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chart_filter_box .goBtn{
+    border: 1px solid #80808054;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 7px;
+    padding: 5px 8px;
+    border-radius: 2px;
+}
+.chart_filter_box .goBtn svg{
+    font-size: 25px;
+    color: #014f86;
+}
 @media screen and (max-width:1199px) {
     .BarChart {
         width: 80% !important;
     }
 }
-
 @media screen and (max-width:600px) {
     .ChartHeader {
         padding: 13px 10px;
     }
-
     .ChartAttendance {
         color: white !important;
         font-size: 10px;
     }
-
     .ChartHeader .chartSelectTag {
         font-size: 10px;
     }
-
     .ChartHeadDetailHeading p {
         font-size: 10px;
     }
 }
-
 @media screen and (max-width:400px){
     .ChartHeader{
         display: flex;

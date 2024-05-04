@@ -165,6 +165,7 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
     ];
 
     async function AppointLetter(id) {
+        
         await fetch(
             `${config["baseUrl"]}/tranAppointment/Tran_AppoinmentLetterByEmpCode`, {
             method: "POST",
@@ -304,6 +305,8 @@ const Appointment = ({ GetAppointStatusCall, Red_Appointment }) => {
                 const blob = new Blob([htmlContent], { type: 'application/msword' });
                 saveAs(blob, response?.data?.[0]?.FileName);
             }
+            
+            
             else {
                 messageApi.open({
                     type: 'error',

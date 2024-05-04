@@ -123,6 +123,7 @@ function PaySlip({
             }
         } catch (error) {
             console.error(error);
+            setLoading(false)
         }
     }
 
@@ -149,6 +150,7 @@ function PaySlip({
             }
         } else {
             message.error(isWaitFun?.message || isWaitFun?.messsage)
+            setLoading(false)
         }
     }
 
@@ -625,140 +627,6 @@ function PaySlip({
                             pagination={false}
                         />
                     )}
-                    {/* <PDFViewer width="100%" height="750px"> */}
-                    {/* <Document> */}
-                    {/* <Page size="A4"> */}
-                    {/* <View> */}
-                    {/* <View style={styles.imageBox}>
-                                        <Image style={styles.imageClass} src={logo} />
-                                        <Text style={styles.textConfi}>Confidential</Text>
-                                    </View>
-                                    <Text style={styles.CompanyName}>{isPDfData?.[0]?.Company_name ? isPDfData?.[0]?.Company_name : "Empty"}</Text>
-                                    <Text style={styles.Head}>PaySlip</Text> */}
-                    {/* Payslip for the month of December 2023 */}
-                    {/* <Text style={styles.yearAndName}>Payslip for the month of {isPDfData?.[0]?.Payslip_Month_Name ? isPDfData?.[0]?.Payslip_Month_Name : "Empty"} {isPDfData?.[0]?.Payslip_Year ? isPDfData?.[0]?.Payslip_Year : "Empty"}</Text> */}
-                    {/* EMPLOYEE INFORMATIONS ================== */}
-                    {/* <View style={styles.upperBox}>
-                                        <View style={styles.row}>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>Name :</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.Emp_name ? isPDfData?.[0]?.Emp_name : "Empty"}</Text>
-                                            </View>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>Designation :</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.Desig_name ? isPDfData?.[0]?.Desig_name : "Empty"}</Text>
-                                            </View>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>Department :</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.Dept_name ? isPDfData?.[0]?.Dept_name : "Empty"}</Text>
-                                            </View>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>CNIC #:</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.Emp_nic_no ? isPDfData?.[0]?.Emp_nic_no : "Empty"}</Text>
-                                            </View>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>Bank :</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.bank_name ? isPDfData?.[0]?.bank_name : "Empty"}</Text>
-                                            </View>
-                                        </View>
-                                        <View style={styles.row}>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>ID :</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.Emp_Code ? isPDfData?.[0]?.Emp_Code : "Empty"}</Text>
-                                            </View>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>Location :</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.Loc_name ? isPDfData?.[0]?.Loc_name : "Empty"}</Text>
-                                            </View>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>Date of joining :</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.Emp_appointment_date ? isPDfData?.[0]?.Emp_appointment_date.slice(0, 10) : "Empty"}</Text>
-                                            </View>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>Account #:</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.Bank_Account_No1 ? isPDfData?.[0]?.Bank_Account_No1 : "Empty"}</Text>
-                                            </View>
-                                            <View style={styles.column}>
-                                                <Text style={styles.textBox}>Days Paid :</Text>
-                                                <Text style={styles.textBox}>{isPDfData?.[0]?.Days_Worked ? isPDfData?.[0]?.Days_Worked : "Empty"}</Text>
-                                            </View>
-                                        </View>
-                                    </View> */}
-                    {/* ============================================= */}
-                    {/* <View style={styles.upperBox} className="mt-5"> */}
-                    {/* Allownces ================= */}
-                    {/* <View style={styles.row2}>
-                                            <Text style={styles.tableHead}>Allowances</Text>
-                                            <View style={styles.rowInner}>
-                                                <Text style={styles.textInner}>Allownce</Text>
-                                                <Text style={styles.textInner}>Standard</Text>
-                                                <Text style={styles.textInner}>Current Month</Text>
-                                                <Text style={styles.textInner}>YTD Amount</Text>
-                                            </View>
-                                            {isPDfData.map((item, index) => (
-                                                <View key={index} style={styles.rowInner}>
-                                                    <Text style={styles.textInner}>{item?.allowance_name ? item?.allowance_name : "Empty"}</Text>
-                                                    <Text style={styles.textInner}>{item?.Allowance_Standard_Amount ? item?.Allowance_Standard_Amount : "Empty"}</Text>
-                                                    <Text style={styles.textInner}>{item?.Allowance_Current_Amount ? item?.Allowance_Current_Amount : "Empty"}</Text>
-                                                    <Text style={styles.textInner}>{item?.Allowance_YTD_Amount ? item?.Allowance_YTD_Amount : "Empty"}</Text>
-                                                </View>
-                                            ))}
-                                            <View style={styles.rowInner}>
-                                                <Text style={styles.textInner}>{"Total"}</Text>
-                                                <Text style={styles.textInner}>{isRevisedTotal?.Allowance_Standard_Amount_Total}</Text>
-                                                <Text style={styles.textInner}>{isRevisedTotal?.Allowance_Current_Amount_Total}</Text>
-                                                <Text style={styles.textInner}>{isRevisedTotal?.Allowance_YTD_Amount_Total}</Text>
-                                            </View>
-                                        </View> */}
-                    {/* DEDUCTIONS ================= */}
-                    {/* <View style={styles.row2}>
-                                            <Text style={styles.tableHead}>Deductions</Text>
-                                            <View style={styles.rowInner}>
-                                                <Text style={styles.textInner}>Deductions</Text>
-                                                <Text style={styles.textInner}>Standard</Text>
-                                                <Text style={styles.textInner}>Current Month</Text>
-                                                <Text style={styles.textInner}>YTD Amount</Text>
-                                            </View>
-                                            {isPDfData.map((item, index) => (
-                                                <View key={index} style={styles.rowInner}>
-                                                    <Text style={styles.textInner}>{item?.Deduction_name ? item?.Deduction_name : "---"}</Text>
-                                                    <Text style={styles.textInner}>{item?.Deduction_Standard_amount ? item?.Deduction_Standard_amount : 0}</Text>
-                                                    <Text style={styles.textInner}>{item?.Deduction_Total_Current_amount ? item?.Deduction_Total_Current_amount : 0}</Text>
-                                                    <Text style={styles.textInner}>{item?.Deduction_Total_YTD_amount ? item?.Deduction_Total_YTD_amount : 0}</Text>
-                                                </View>
-                                            ))}
-                                            <View style={styles.rowInner}>
-                                                <Text style={styles.textInner}>{"Total"}</Text>
-                                                <Text style={styles.textInner}>{isRevisedTotal?.Deduction_Standard_amount_total}</Text>
-                                                <Text style={styles.textInner}>{isRevisedTotal?.Deduction_Total_Current_amount_total}</Text>
-                                                <Text style={styles.textInner}>{isRevisedTotal?.Deduction_Total_YTD_amount_total}</Text>
-                                            </View>
-                                        </View> */}
-                    {/* </View> */}
-                    {/* <View style={styles.netPayBox}>
-                                        <View style={styles.innerNetPayBox}>
-                                            <Text style={styles.Gross_Salary}>Net Pay :</Text>
-                                            <Text style={styles.Gross_Salary}>{isGrossSalary}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={styles.signatureBox}>
-                                        <Text style={styles.HRText}>This is a system generated document therefore, no signature is required. HR departmant can be contacted for any verification.</Text>
-                                    </View>
-                                    <View style={styles.borderBot}></View>
-                                    <View style={styles.userIdAndPrintBox}>
-                                        <View style={styles.botFlexBox}>
-                                            <Text style={styles.Gross_Salary}>User ID :</Text>
-                                            <Text style={styles.Gross_Salary}>{isPDfData?.[0]?.Emp_Code ? isPDfData?.[0]?.Emp_Code : "Empty"}</Text>
-                                        </View>
-                                        <View style={styles.botFlexBox}>
-                                            <Text style={styles.Gross_Salary}>Print Date :</Text>
-                                            <Text style={styles.Gross_Salary}>{date}</Text>
-                                        </View>
-                                    </View> */}
-                    {/* </View> */}
-                    {/* </Page> */}
-                    {/* </Document> */}
-                    {/* </PDFViewer> */}
                 </div>
             </div>
         </>
