@@ -7,6 +7,9 @@ import { RxDashboard as RxDashboard_ico } from 'react-icons/rx'
 import { Space, Table, } from 'antd';
 import { message } from 'antd';
 import { RiOrganizationChart } from "react-icons/ri";
+import { CiViewList } from "react-icons/ci";
+import { LuListStart } from "react-icons/lu";
+import { FaChartBar } from "react-icons/fa";
 import baseUrl from "../config.json";
 const config = require('../config.json')
 
@@ -123,7 +126,7 @@ function TAShortsCut() {
           </div>
           <div className="col-lg-3 mt-5">
             <Link to={'/Dashboard'} className="dashBoxes">
-              <RxDashboard_ico />
+              <FaChartBar />
               {/* Attendance */}
               <span style={{color: "white"}}>Attendance</span>
             </Link>
@@ -142,13 +145,13 @@ function TAShortsCut() {
           </div>
           <div className="col-lg-3 mt-5">
             <Link to="/Pay/PaySlip" className="dashBoxes">
-              <Plus_ico />
+              <CiViewList />
               <span style={{color: "white"}}>Pay Slip</span>
             </Link>
           </div>
           <div className="col-lg-3 mt-5">
             <Link to="/Tax_Report" className="dashBoxes">
-              <Plus_ico />
+              <LuListStart />
               <span style={{color: "white"}}>Tax Report</span>
             </Link>
           </div>
