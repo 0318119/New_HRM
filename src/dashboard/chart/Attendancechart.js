@@ -120,6 +120,7 @@ export default function Attendancechart() {
   };
 
   const labels = getAttendData?.map((items) => items.Date + " " + items.Month);
+  console.log("getAttendData",getAttendData)
   const data = {
     labels,
     datasets: [
@@ -150,7 +151,15 @@ export default function Attendancechart() {
       {
         id: 4,
         label: 'Off',
-        data: getAttendData?.map((items) => items?.DayType == 'Holiday' && items?.DayName == "Saturday" || items?.DayName == "Sunday" ? 9.10 : null),
+        data: getAttendData?.map((items) =>  items?.DayName == "Saturday" && items?.Attendance_Status == "Holiday" ? 9.10 : null),
+        backgroundColor: "black",
+        borderColor: 'black',
+        borderWidth: 2,
+      },
+      {
+        id: 5,
+        label: 'Off',
+        data: getAttendData?.map((items) => items?.DayName == "Sunday" && items?.Attendance_Status == "Holiday" ? 9.10 : null),
         backgroundColor: "black",
         borderColor: 'black',
         borderWidth: 2,
