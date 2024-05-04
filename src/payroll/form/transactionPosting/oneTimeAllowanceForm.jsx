@@ -40,10 +40,12 @@ const OneTimeAllowanceForm = ({ currentUser, getEmployeeData, getAllowanceList, 
         setAllowanceList(allowanceList)
     }
     const OnSelect = async (e) => {
+        console.log(e?.value)
         if (e?.label !== undefined) {
             const AllowanceDetail = await getAllowanceDetail({ Allowance_Code: e?.value, Emp_code: employee?.Sequence_no })
+            console.log(AllowanceDetail,'amount1')
             setAllowanceDetail({
-                Amount: AllowanceDetail[0]?.Amount == undefined ? '0' : AllowanceDetail[0]?.Amount,
+                Amount: AllowanceDetail[0]?.Amount == undefined ? '' : AllowanceDetail[0]?.Amount,
                 Remarks: AllowanceDetail[0]?.Remarks == undefined ? '' : AllowanceDetail[0]?.Remarks,
                 Deduction_code: 0,
                 Allowance_Code: e?.value,
@@ -59,7 +61,7 @@ const OneTimeAllowanceForm = ({ currentUser, getEmployeeData, getAllowanceList, 
         setAllowanceDetail(
             {
                 Amount: allowanceDetail.Amount,
-                Remarks: e,
+                Remarks: e?.target?.value,
                 Deduction_code: allowanceDetail.Deduction_code,
                 Allowance_Code: allowanceDetail.Allowance_Code,
                 Emp_code: allowanceDetail.Emp_code,
@@ -69,7 +71,7 @@ const OneTimeAllowanceForm = ({ currentUser, getEmployeeData, getAllowanceList, 
     const AmountChange = (e) => {
         setAllowanceDetail(
             {
-                Amount: e,
+                Amount: e?.target?.value,
                 Remarks: allowanceDetail.Remarks,
                 Deduction_code: allowanceDetail.Deduction_code,
                 Allowance_Code: allowanceDetail.Allowance_Code,

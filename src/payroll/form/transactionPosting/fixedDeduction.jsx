@@ -6,7 +6,7 @@ import Select from '../../../components/basic/input/select'
 import { Skeleton, message } from "antd";
 import { Button, CancelButton, DeleteButton } from '../../../components/basic/button/index';
 
-const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSallaryData, getDeductionList,currentUser, getEmployeeData, getAllowanceDetail, saveAllowanceDetail, cancel, DeleteAllowanceDetail }) => {
+const OneTimeAllowanceForm = ({ getDeductionEmployeeData, getDeductionEmployeeSallaryData, getDeductionList, currentUser, getEmployeeData, getAllowanceDetail, saveAllowanceDetail, cancel, DeleteAllowanceDetail }) => {
     const [employee, setEmployee] = useState()
     const [employeeSallary, setEmployeeSallary] = useState()
     const [allowanceList, setAllowanceList] = useState()
@@ -21,7 +21,7 @@ const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSall
         Emp_code: "",
         Deduction_code: ""
     })
-    console.log(currentUser,'asdas')
+    console.log(currentUser, 'asdas')
     const reset = () => {
         cancel('read')
         setAllowanceDetail({
@@ -48,10 +48,9 @@ const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSall
     const OnSelect = async (e) => {
         if (e?.label !== undefined) {
             const AllowanceDetail = await getAllowanceDetail({ DeductionCode: e?.value, Emp_code: employee?.Sequence_no })
-            console.log(AllowanceDetail[0]?.Amount,'amounty')
             setAllowanceDetail({
-                Amount: AllowanceDetail[0]?.Amount==undefined?'0':AllowanceDetail[0]?.Amount,
-                Remarks:AllowanceDetail[0]?.Remarks==undefined?'':AllowanceDetail[0]?.Remarks,
+                Amount: AllowanceDetail[0]?.Amount == undefined ? '' : AllowanceDetail[0]?.Amount,
+                Remarks: AllowanceDetail[0]?.Remarks == undefined ? '' : AllowanceDetail[0]?.Remarks,
                 Deduction_code: e?.value,
                 Allowance_Code: 0,
                 Emp_code: employee?.Sequence_no,
@@ -66,7 +65,7 @@ const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSall
         setAllowanceDetail(
             {
                 Amount: allowanceDetail.Amount,
-                Remarks: e,
+                Remarks: e?.target?.value,
                 Deduction_code: allowanceDetail.Deduction_code,
                 Allowance_Code: allowanceDetail.Allowance_Code,
                 Emp_code: allowanceDetail.Emp_code,
@@ -76,7 +75,7 @@ const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSall
     const AmountChange = (e) => {
         setAllowanceDetail(
             {
-                Amount: e,
+                Amount: e?.target?.value,
                 Remarks: allowanceDetail.Remarks,
                 Deduction_code: allowanceDetail.Deduction_code,
                 Allowance_Code: allowanceDetail.Allowance_Code,
@@ -85,9 +84,9 @@ const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSall
         )
     }
     const saveAllowance = async () => {
-        console.log(allowanceDetail.Amount,'asdas')
+        console.log('saveAllowancez')
         setLoading(true)
-        if (allowanceDetail.Amount == ""||allowanceDetail.Amount==undefined) {
+        if (allowanceDetail.Amount == "" || allowanceDetail.Amount == undefined) {
             message.error('Amount is required')
             setLoading(false)
         }
@@ -95,7 +94,7 @@ const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSall
             message.error('Enter valid amount')
             setLoading(false)
         }
-        else if (allowanceDetail.Remarks == ""||allowanceDetail.Amount==undefined) {
+        else if (allowanceDetail.Remarks == "" || allowanceDetail.Amount == undefined) {
             message.error('Remarks is required')
             setLoading(false)
         }
@@ -103,13 +102,14 @@ const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSall
             const AllowanceSave = await saveAllowanceDetail({
                 Emp_Code: allowanceDetail?.Emp_code,
                 Allowance_code: '0',
-                Deduction_code:allowanceDetail?.Deduction_code,
+                Deduction_code: allowanceDetail?.Deduction_code,
                 ADE_flag: "D",
                 FOE_flag: "F",
                 Amount: allowanceDetail?.Amount,
                 Reverse_flag: "N",
                 Remarks: allowanceDetail?.Remarks
             })
+            console.log(AllowanceSave,'cccc')
             if (AllowanceSave.success == "success") {
                 message.success('Allowance Created');
                 setLoading(false)
@@ -118,12 +118,14 @@ const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSall
             setLoading(false)
         }
     }
+
+
     const DeleteAllowance = async () => {
         setDelLoading(true)
         const AllowanceSave = await DeleteAllowanceDetail({
             Emp_Code: allowanceDetail?.Emp_code,
             Allowance_code: 0,
-            Deduction_code:  allowanceDetail?.Deduction_code,
+            Deduction_code: allowanceDetail?.Deduction_code,
         })
         if (AllowanceSave.success == "success") {
             message.success('Allowance Deleted');
@@ -134,16 +136,20 @@ const OneTimeAllowanceForm = ({getDeductionEmployeeData,getDeductionEmployeeSall
     }
     return (
         <>
-            {loader ? <Skeleton active /> :
+            {loader ?
+                <div className="pt-3 px-2">
+                    <Skeleton active />
+                </div>
+                 :
                 <>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <Input value={employee?.Emp_name} readonly={true} label={'Employee Name'} name={'employeeName'} />
                         <Input value={employee?.Desig_name} readonly={true} label={'Designation'} name={'designation'} />
                         <Input value={employee?.Dept_name} readonly={true} label={'Department'} name={'department'} />
-                        <Select  handleChange={OnSelect} label={'Select Allowance'} option={allowanceList} />
+                        <Select handleChange={OnSelect} label={'Select Deduction'} option={allowanceList} />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Input value={employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary==null?"0.00":employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary} readonly={true} label={'Last Month Net Salary'} name={'employeeName'} />
+                        <Input value={employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary == null ? "0.00" : employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary} readonly={true} label={'Last Month Net Salary'} name={'employeeName'} />
                         <Input value={employeeSallary?.LastMonthGrossSalary?.LastMonthGrossSalary} readonly={true} label={'Last Month Gross Salary'} name={'designation'} />
                     </div>
                     {isNext &&

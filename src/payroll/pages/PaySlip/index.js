@@ -619,7 +619,7 @@ function PaySlip({
                     </div>
                 </div>
                 <div class="mt-5 row justify-content-center">
-                    {isPDfData?.length > 0 && (
+                    {/* {isPDfData?.length > 0 && (
                         <Table
                             columns={columns}
                             loading={isLoading}
@@ -627,7 +627,7 @@ function PaySlip({
                             scroll={{ x: 10 }}
                             pagination={false}
                         />
-                    )}
+                    )} */}
                 </div>
             </div>
         </>

@@ -11,6 +11,7 @@ import { FormSelect } from '../../../../components/basic/input/formInput';
 import Header from '../../../../components/Includes/Header';
 import '../../../assest/css/paySlip.css'
 import { DateTime } from "luxon";
+import { message } from 'antd';
 
 const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) => {
     const [loading, setLoading] = useState(false)
@@ -304,9 +305,16 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
             payroll_month: data?.Month,
             Emp_Code: data?.Employee_Id
         })
-        setPdfData(DataFromApi)
-        const PasswordData = await GetAllEmpPass(data?.Employee_Id)
-        setPdfPassowrd(PasswordData.data[0]?.Emp_nic_no)
+        if(DataFromApi?.length > 1){
+            setPdfData(DataFromApi)
+            const PasswordData = await GetAllEmpPass(data?.Employee_Id)
+            setPdfPassowrd(PasswordData.data[0]?.Emp_nic_no)
+            setLoading(false)
+            message.success("PDF is downloding...")
+        }else{
+            message.error("Record not found")
+            setLoading(false)
+        }
     }
 
     const blobProvider = async () => {
@@ -568,6 +576,8 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
             blobProvider()
         }
     }, [isPdfData, pdfPassowrd])
+
+    console.log("isPdfData",isPdfData)
 
 
     return (

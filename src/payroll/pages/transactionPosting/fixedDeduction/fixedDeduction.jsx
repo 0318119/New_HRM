@@ -9,9 +9,9 @@ import { connect } from "react-redux";
 
 
 
-const FixedDeduction = ({getFixedDeductionData,FixedDeduction}) => {
-    const [mode,setMode] = useState('read')
-    const [current,setCurrent] = useState()
+const FixedDeduction = ({ getFixedDeductionData, FixedDeduction }) => {
+    const [mode, setMode] = useState('read')
+    const [current, setCurrent] = useState()
     const [search, setSearch] = useState(null)
     const [pageNo, setPageNo] = useState(1)
     const [pageSize, setPageSize] = useState(10)
@@ -48,7 +48,7 @@ const FixedDeduction = ({getFixedDeductionData,FixedDeduction}) => {
         })
     }, [])
 
-    const converter=(w,e)=>{
+    const converter = (w, e) => {
         setMode(w)
         setCurrent(e)
     }
@@ -68,7 +68,7 @@ const FixedDeduction = ({getFixedDeductionData,FixedDeduction}) => {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <button onClick={()=>{converter('edit',_?.Emp_code)}} className={Style.editButton}><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    <button onClick={() => { converter('edit', _?.Emp_code) }} className={Style.editButton}><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                 </Space>
             ),
         },
@@ -79,20 +79,22 @@ const FixedDeduction = ({getFixedDeductionData,FixedDeduction}) => {
                 <Header />
             </div>
             <div>
-                <SecondaryHeader isSearch={mode == 'read'?true:false} onSearchClick={onSearchClick} searchParam={uniSearch} title={'Transaction - Fixed Deduction'} total={'1,000'} />
+                <SecondaryHeader isSearch={mode == 'read' ? true : false} onSearchClick={onSearchClick} searchParam={uniSearch} title={'Transaction - Fixed Deduction'} total={""} />
             </div>
             <div className={Style.TableBody}>
-                {mode=='read'?
-                <Table pagination={{
-                    defaultCurrent: pageNo,
-                    onChange: (p) => {
-                        setPageNo(p);
-                    },
-                    pageSize: pageSize,
-                }} loading={FixedDeduction?.loading} columns={columns} dataSource={FixedDeduction?.data} />
-                :
-                <FixedDeductionForm cancel={setMode} currentUser={current}/>
-                }
+                <div className="container px-0 pt-3">
+                    {mode == 'read' ?
+                        <Table pagination={{
+                            defaultCurrent: pageNo,
+                            onChange: (p) => {
+                                setPageNo(p);
+                            },
+                            pageSize: pageSize,
+                        }} loading={FixedDeduction?.loading} columns={columns} dataSource={FixedDeduction?.data} />
+                        :
+                        <FixedDeductionForm cancel={setMode} currentUser={current} />
+                    }
+                </div>
             </div>
         </>
     )

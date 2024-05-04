@@ -16,7 +16,7 @@ export const ChangeFlag = (body) => async (dispatch, getState) => {
             },
             body: JSON.stringify({
                 payroll_month:body?.currentMonth,
-                payrollYear:body?.currentYear.toString()
+                payrollYear:body?.currentYear
             })
         });
         const res = await response.json()
