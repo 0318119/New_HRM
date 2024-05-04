@@ -136,7 +136,8 @@ const routing = () => {
             localStorage.getItem('access_token') !== null &&
             localStorage.getItem('access_token') !== "" ?
             <>
-               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/InnerDashboard" element={<InnerDashboard />} />
               <Route path="/Appointment" element={<Appointment />} />
               <Route path="/TAPersonalform" element={<TAPersonalform />} />
               <Route path="/TAShortsCut" element={<TAShortsCut />} />
@@ -241,9 +242,9 @@ const routing = () => {
               <Route path="/Fixed_Allowance" element={<FixedAllowance />} />
               <Route path="One_Time_Deduction" element={<OneTimeDeduction />} />
               <Route path="/Fixed_Deduction" element={<FixedDeduction />} />
-              <Route path="/Hr_Release" element={<HrRelease />} />
+              <Route path="/Release_HR_Entry" element={<HrRelease />} />
               <Route path="/Advance_Salary" element={<AdvanceSalary />} />
-              <Route path="/Undo_Payroll_Calculation" element={<UndoPayrollCalculation />} />
+              <Route path="/Undo_Monthly_Payroll_Calculatio" element={<UndoPayrollCalculation />} />
               <Route path="/Closing_Payroll_Month" element={<ClosingPayrollMonth />} />
               <Route path="/Payroll_Master" element={<Payroll_Master />} />
               <Route path="/Add_Payroll" element={<AddPayroll />} />
@@ -257,7 +258,7 @@ const routing = () => {
               <Route path="/Allowances" element={<AddAllowance />} />
               <Route path="/Deductions" element={<AddDeduction />} />
               <Route path="/Loans" element={<AddLoans />} />
-              <Route path="/Payroll_monthly_calculation" element={<Payroll_monthly_calculation />} />
+              <Route path="/Monthly_Payroll_Calculatio" element={<Payroll_monthly_calculation />} />
               <Route path="/Salary_OnHold_Report" element={<SalaryOnHold />} />
             </> :
             <>

@@ -13,6 +13,7 @@ import Header from '../../../../components/Includes/Header';
 import '../../../assest/css/paySlip.css'
 import { saveAs } from 'file-saver';
 import { DateTime } from "luxon";
+import imgLogo from '../../../../Assets/Images/download.png'
 
 
 
@@ -50,19 +51,12 @@ const SalaryOnHold = ({ getSalaryOnHold , Red_SalaryOnHold  }) => {
         setPdfData(DataFromApi)
     }
 
-
-    console.log(Red_SalaryOnHold?.data , 'setData')
-   
-
     const PdfData = (
         <Document >
           <Page size="A4">
             <View>
-           {Red_SalaryOnHold?.data?.map((item , index) => {
-               <Text key={index}>
-                     {item.img}
-               </Text>
-           })}
+            {/* Red_SalaryOnHold?.data?.[0]?.img */}
+              <Image src={imgLogo} style={{height: "60px",width: "80px"}}/>
               <Text style={{ textAlign: 'center', fontSize: '16', fontWeight: 'bold', marginTop: "20" }}>
                 Employee Attendance PDF
               </Text>

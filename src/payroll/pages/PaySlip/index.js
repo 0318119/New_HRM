@@ -571,6 +571,7 @@ function PaySlip({
                                     name={'Emp_code'}
                                     label={'Select Employee'}
                                     options={options}
+                                    disabled={true}
                                 />
                                 <FormSelect
                                     errors={errors}

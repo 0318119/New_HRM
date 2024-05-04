@@ -588,6 +588,7 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
                                     name={'Employee_Id'}
                                     label={'Select Employee'}
                                     options={options}
+                                    disabled={true}
                                 />
                                 <FormSelect
                                     errors={errors}
