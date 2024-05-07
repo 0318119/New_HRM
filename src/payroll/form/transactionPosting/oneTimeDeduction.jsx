@@ -13,6 +13,10 @@ const PayrollUploadData = ({ getDeductionEmployeeData, getDeductionEmployeeSalla
     const [isNext, setIsNext] = useState(false)
     const [loading, setLoading] = useState(false)
     const [delLoading, setDelLoading] = useState(false)
+    const [loader, setLoader] = useState(false)
+    const [messageApi, contextHolder] = message.useMessage();
+
+
     const [allowanceDetail, setAllowanceDetail] = useState({
         Amount: "",
         Remarks: "",
@@ -34,33 +38,56 @@ const PayrollUploadData = ({ getDeductionEmployeeData, getDeductionEmployeeSalla
         DataLoader()
     }, [])
     const DataLoader = async () => {
+        setLoader(true)
         const employeeData = await getDeductionEmployeeData({ Emp_code: currentUser })
         setEmployee(employeeData[0]);
         const allowanceList = await getDeductionList()
         setAllowanceList(allowanceList)
         const employeeDataSallary = await getDeductionEmployeeSallaryData({ Emp_code: currentUser })
         setEmployeeSallary(employeeDataSallary)
+        setLoader(false)
     }
+
+
+
+
+    const MessageSuccess = () => {
+        messageApi.open({
+            type: 'loading',
+            content: 'Please Wait',
+            duration: 0,
+        });
+    };
+    const [isStopped, setIsStopped] = useState(false)
     const OnSelect = async (e) => {
         if (e?.label !== undefined) {
+            setIsStopped(true)
+            MessageSuccess()
             const AllowanceDetail = await getAllowanceDetail({ DeductionCode: e?.value, Emp_code: employee?.Sequence_no })
-            if(AllowanceDetail?.success){
+            if (AllowanceDetail?.success) {
                 setAllowanceDetail({
-                    Amount: AllowanceDetail?.data[0]?.Amount == undefined ? '0' : AllowanceDetail?.data[0]?.Amount,
+                    Amount: AllowanceDetail?.data[0]?.Amount == undefined ? '' : AllowanceDetail?.data[0]?.Amount,
                     Remarks: AllowanceDetail?.data[0]?.Remarks == undefined ? '' : AllowanceDetail?.data[0]?.Remarks,
                     Deduction_code: e?.value,
                     Allowance_Code: 0,
                     Emp_code: employee?.Sequence_no,
                 })
-            }else{
+            } else {
                 message.error(AllowanceDetail?.message || AllowanceDetail?.messsage)
             }
+            setIsStopped(false)
+            messageApi.destroy()
             setIsNext(true)
         }
         else {
             setIsNext(false)
         }
     }
+
+
+
+
+
     const RemarksChange = (e) => {
         setAllowanceDetail(
             {
@@ -75,7 +102,7 @@ const PayrollUploadData = ({ getDeductionEmployeeData, getDeductionEmployeeSalla
     const AmountChange = (e) => {
         setAllowanceDetail(
             {
-                Amount: e?.value,
+                Amount: e?.target.value,
                 Remarks: allowanceDetail.Remarks,
                 Deduction_code: allowanceDetail.Deduction_code,
                 Allowance_Code: allowanceDetail.Allowance_Code,
@@ -84,7 +111,7 @@ const PayrollUploadData = ({ getDeductionEmployeeData, getDeductionEmployeeSalla
         )
     }
     const saveAllowance = async () => {
-        // setLoading(true)
+        setLoading(true)
         if (allowanceDetail.Amount == "" || allowanceDetail.Amount == undefined) {
             message.error('Amount is required')
             setLoading(false)
@@ -109,10 +136,10 @@ const PayrollUploadData = ({ getDeductionEmployeeData, getDeductionEmployeeSalla
                 Remarks: allowanceDetail?.Remarks
             })
             if (AllowanceSave?.success == "success") {
-                message.success('Allowance Created');
+                message.success('Deduction Created');
                 setLoading(false)
                 reset()
-            }else{
+            } else {
                 message.error(AllowanceSave?.message || AllowanceSave?.messsage);
             }
             setLoading(false)
@@ -126,53 +153,63 @@ const PayrollUploadData = ({ getDeductionEmployeeData, getDeductionEmployeeSalla
             Deduction_code: allowanceDetail?.Deduction_code,
         })
         if (AllowanceSave?.success == "success") {
-            message.success('Allowance Deleted');
+            message.success('Deduction Deleted');
             setDelLoading(false)
             reset()
-        }else{
+        } else {
             message.success(AllowanceSave?.message || AllowanceSave?.messsage);
             setDelLoading(false)
         }
     }
     return (
         <>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-6 p-0">
-                        <Input value={employee?.Emp_name} readonly={true} label={'Employee Name'} name={'employeeName'} />
-                        <Input value={employee?.Desig_name} readonly={true} label={'Designation'} name={'designation'} />
+            {contextHolder}
+            {loader ?
+                <div className="pt-3">
+                    <Skeleton active />
+                </div> :
+                <>
+                    <div className="row">
+                        <div className="col-md-3 p-0">
+                            <Input value={employee?.Emp_name} readonly={true} label={'Employee Name'} name={'employeeName'} />
+                        </div>
+                        <div className="col-md-3 p-0">
+                            <Input value={employee?.Desig_name} readonly={true} label={'Designation'} name={'designation'} />
+                        </div>
+                        <div className="col-md-3 p-0">
+                            <Input value={employee?.Dept_name} readonly={true} label={'Department'} name={'department'} />
+                        </div>
+                        <div className="col-md-3 p-0">
+                            <Select handleChange={OnSelect} label={'Select Deduction'} option={allowanceList} />
+                        </div>
+                        <div className="col-md-3 p-0">
+                            <Input value={employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary == null ? "0.00" : employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary} readonly={true} label={'Last Month Net Salary'} name={'employeeName'} />
+                        </div>
+                        <div className="col-md-3 p-0">
+                            <Input value={employeeSallary?.LastMonthGrossSalary?.LastMonthGrossSalary} readonly={true} label={'Last Month Gross Salary'} name={'designation'} />
+                        </div>
+                        {isNext &&
+                            <>
+                                <div className="col-12 mt-5">
+                                    <h3 style={{ color: 'black' }}><b>Transaction Information</b></h3>
+                                </div>
+                                <hr />
+                                <div className="col-md-6 p-0">
+                                    <Input onChange={AmountChange} OrValue={allowanceDetail.Amount} placeholder={"Enter amount"} label={'Amount'} name={'Amount'} type={'number'} />
+                                </div>
+                                <div className="col-md-6 p-0">
+                                    <Input onChange={RemarksChange} OrValue={allowanceDetail.Remarks}  placeholder={"Enter remarks"} label={'Remarks'} name={'Remarks'} max={'50'} />
+                                </div>
+                                <div className="col-12 mt-5 p-0 d-flex justify-content-end align-items-center">
+                                    <CancelButton onClick={reset} title={'Cancel'} />
+                                    <DeleteButton loading={delLoading} onClick={DeleteAllowance} title={'Delete'} />
+                                    <Button loading={loading} onClick={saveAllowance} title={'Save'} />
+                                </div>
+                            </>
+                        }
                     </div>
-                    <div className="col-md-6 p-0">
-                        <Input value={employee?.Dept_name} readonly={true} label={'Department'} name={'department'} />
-                        <Select handleChange={OnSelect} label={'Select Allowance'} option={allowanceList} />
-                    </div>
-                    <div className="col-md-6 p-0">
-                        <Input value={employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary == null ? "0.00" : employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary} readonly={true} label={'Last Month Net Salary'} name={'employeeName'} />
-                    </div>
-                    <div className="col-md-6 p-0">
-                        <Input value={employeeSallary?.LastMonthGrossSalary?.LastMonthGrossSalary} readonly={true} label={'Last Month Gross Salary'} name={'designation'} />
-                    </div>
-                    {isNext &&
-                        <>
-                            <div className="col-12 mt-5">
-                                <h3 style={{ color: 'black' }}><b>Transaction Information</b></h3>
-                            </div>
-                            <hr />
-                            <div className="col-md-6 p-0">
-                                <Input onChange={AmountChange} value={allowanceDetail.Amount} label={'Amount'} name={'Amount'} type={'number'} />
-                            </div>
-                            <div className="col-md-6 p-0">
-                                <Input onChange={RemarksChange} value={allowanceDetail.Remarks} label={'Remarks'} name={'Remarks'} max={'50'} />
-                            </div>
-                            <div className="col-12 mt-5 p-0 d-flex justify-content-end align-items-center">
-                                <CancelButton onClick={reset} title={'Cancel'} />
-                                <DeleteButton loading={delLoading} onClick={DeleteAllowance} title={'Delete'} />
-                                <Button loading={loading} onClick={saveAllowance} title={'Save'} />
-                            </div>
-                        </>
-                    }
-                </div>
-            </div>
+                </>
+            }
         </>
     )
 }

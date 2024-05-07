@@ -3,14 +3,14 @@ import './assets/css/header.css'
 import { MdLogout as MdLogout } from 'react-icons/md';
 import { MdNotifications as Notify_ico } from "react-icons/md";
 import Propic from '../../Assets/Images/profile.png'
-import Logo from '../../Assets/Images/logoMish.png'
+import Logo from '../../Assets/Images/logo-light.png'
 import secureLocalStorage from 'react-secure-storage';
 import { Link, useNavigate } from 'react-router-dom';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CancelIcon from '@mui/icons-material/Cancel';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import LogoHeader from '../image/logo.webp'
+import LogoHeader from '../../Assets/Images/logo-light.png'
 const config = require('../../config.json')
 
 

@@ -86,7 +86,7 @@ const OneTimeDeduction = ({ getOneTimeDeduction, oneTimeDeduction }) => {
                 <SecondaryHeader isSearch={mode == 'read' ? true : false} onSearchClick={onSearchClick} searchParam={uniSearch} title={'Onetime Deduction'} total={''} />
             </div>
             <div className={Style.TableBody}>
-                <div className="container">
+                <div className="container pt-3">
                     {mode == 'read' ?
                         <Table pagination={{
                             defaultCurrent: pageNo,

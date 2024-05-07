@@ -104,7 +104,7 @@ export const getAllowanceDetail = (body) => async (dispatch, getState) => {
                 AllowanceCode: "0",
                 DeductionCode: body?.DeductionCode,
                 ADEFlag: "D",
-                p_FOEFlag: "F"
+                FOEFlag: "F"
             })
         });
         const res = await response.json()

@@ -62,7 +62,7 @@ import Red_Confirmation from "./reducers/HrOperations/Master_Maintaince/Confirma
 import Red_Access_Control from "./reducers/Addministration/UserProfile/Access_Control/index"
 import Red_Forget_Password from "./reducers/LoginScreen/ForgetPassword/index";
 import Red_Due_For_Confirmation from "./reducers/HrOperations/Due_For_Confirmation/index"
-import SalaryOnHold from "../payroll/pages/Reports/SalaryOnHold/index";
+import Red_SalaryOnHold from "./reducers/payroll/salaryOnHold/index";
 import Red_AppointEducation from './reducers/Appointments/AppointEducation/index'
 import Red_ServiceLengthReport from './reducers/HrOperations/ServiceLengthReport'
 import Red_AppointExprience from "./reducers/Appointments/AppointmentExprience/index";
@@ -85,6 +85,8 @@ import Red_Paysheet_Report from './reducers/payroll/Paysheet_Report'
 import Red_Confirmation_Extension from './reducers/MasterMaintaince/Confirmation_Extension/index'
 import Red_Increment from './reducers/MasterMaintaince/Increment/index'
 import Red_Transaction_Resignation from './reducers/MasterMaintaince/Transaction_Resignation/index'
+import Red_Payroll_cal from './reducers/payroll/calculation'
+
 
 const reducers = combineReducers({
   Red_Login,
@@ -154,7 +156,7 @@ const reducers = combineReducers({
   Red_Access_Control,
   Red_Forget_Password,
   Red_Due_For_Confirmation,
-  SalaryOnHold,
+  Red_SalaryOnHold,
   Red_AppointEducation,
   Red_ServiceLengthReport,
   Red_AppointSalary,
@@ -178,7 +180,8 @@ const reducers = combineReducers({
   Red_Promotion,
   Red_Confirmation_Extension,
   Red_Increment,
-  Red_Transaction_Resignation
+  Red_Transaction_Resignation,
+  Red_Payroll_cal
 
 });
 

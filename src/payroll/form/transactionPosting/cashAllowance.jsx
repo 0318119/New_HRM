@@ -9,6 +9,7 @@ const CashAllowanceForm = ({ currentUser, getEmployeeData, getAllowanceList, get
     const [employee, setEmployee] = useState()
     const [loading, setLoading] = useState(false)
     const [delLoading, setDelLoading] = useState(false)
+    const [loader, setLoader] = useState(false)
     const [allowanceDetail, setAllowanceDetail] = useState({
         Cash_Award_Amount: "",
         Deposit_Amount: "",
@@ -29,6 +30,7 @@ const CashAllowanceForm = ({ currentUser, getEmployeeData, getAllowanceList, get
         DataLoader()
     }, [])
     const DataLoader = async () => {
+        setLoader(true)
         const employeeData = await getEmployeeData({ Emp_Code: currentUser })
         const allowanceCashList = await getEmployeeCashData({ Emp_Code: currentUser })
         setAllowanceDetail({
@@ -38,6 +40,7 @@ const CashAllowanceForm = ({ currentUser, getEmployeeData, getAllowanceList, get
             remarks: allowanceCashList[0]?.remarks,
         })
         setEmployee(employeeData[0]);
+        setLoader(false)
     }
     const saveAllowance = async () => {
         setLoading(true)
@@ -79,35 +82,43 @@ const CashAllowanceForm = ({ currentUser, getEmployeeData, getAllowanceList, get
         });
     }
 
+
+    console.log(employee,'elevent')
     return (
         <>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-6 p-0">
-                        <Input value={employee?.Emp_name} readonly={true} label={'Employee Name'} name={'employeeName'} />
-                        <Input value={employee?.Desig_name} readonly={true} label={'Designation'} name={'designation'} />
-                    </div>
-                    <div className="col-md-6 p-0">
-                        <Input value={employee?.Dept_name} readonly={true} label={'Department'} name={'department'} />
-                        <Input readonly={true} value={allowanceDetail?.Letter_date} label={'Letter Date'} name={'Letter_date'} />
-                    </div>
-                    <hr className="mt-5"/>
-                    <div className="col-md-4 p-0">
-                        <Input type={'number'} onChange={handleChange} value={allowanceDetail?.Deposit_Amount} label={'Deposit Amount'} name={'Deposit_Amount'} />
-                    </div>
-                    <div className="col-md-4 p-0">
-                        <Input type={'number'} onChange={handleChange} value={allowanceDetail?.Cash_Award_Amount} label={'Cash Award Amount'} name={'Cash_Award_Amount'} />
-                    </div>
-                    <div className="col-md-4 p-0">
-                        <Input onChange={handleChange} value={allowanceDetail?.remarks} label={'Remarks'} name={'remarks'} />
-                    </div>
-                    <div className="col-12 mt-5 d-flex justify-content-end align-items-center p-0">
-                        <CancelButton onClick={reset} title={'Cancel'} />
-                        <DeleteButton loading={delLoading} onClick={DeleteAllowance} title={'Delete'} />
-                        <Button loading={loading} onClick={saveAllowance} title={'Save'} />
-                    </div>
+            {loader ?
+                <div className="pt-3">
+                    <Skeleton active />
                 </div>
-            </div>
+                :
+                <>
+                    <div className="row">
+                        <div className="col-md-6 p-0">
+                            <Input value={employee?.Emp_name} readonly={true} label={'Employee Name'} name={'employeeName'} />
+                            <Input value={employee?.Desig_name} readonly={true} label={'Designation'} name={'designation'} />
+                        </div>
+                        <div className="col-md-6 p-0">
+                            <Input value={employee?.Dept_name} readonly={true} label={'Department'} name={'department'} />
+                            <Input readonly={true} value={allowanceDetail?.Letter_date} placeholder={"Letter date"} label={'Letter Date'} name={'Letter_date'} />
+                        </div>
+                        <hr className="mt-5" />
+                        <div className="col-md-4 p-0">
+                            <Input type={'number'} onChange={handleChange} value={allowanceDetail?.Deposit_Amount} placeholder={"Enter deposit amount"} label={'Deposit Amount'} name={'Deposit_Amount'} />
+                        </div>
+                        <div className="col-md-4 p-0">
+                            <Input type={'number'} onChange={handleChange} value={allowanceDetail?.Cash_Award_Amount} placeholder={"Enter award amount"} label={'Cash Award Amount'} name={'Cash_Award_Amount'} />
+                        </div>
+                        <div className="col-md-4 p-0">
+                            <Input onChange={handleChange} value={allowanceDetail?.remarks} placeholder={"Enter remarks"} label={'Remarks'} name={'remarks'} />
+                        </div>
+                        <div className="col-12 mt-5 d-flex justify-content-end align-items-center p-0">
+                            <CancelButton onClick={reset} title={'Cancel'} />
+                            <DeleteButton loading={delLoading} onClick={DeleteAllowance} title={'Delete'} />
+                            <Button loading={loading} onClick={saveAllowance} title={'Save'} />
+                        </div>
+                    </div>
+                </>
+            }
         </>
     )
 }

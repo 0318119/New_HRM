@@ -156,6 +156,13 @@ export const GET_MASTER_EARNING_DATA_START = "GET_POSITION_DATA_START";
 export const GET_MASTER_EARNING_DATA_SINGLE = "GET_POSITION_DATA_SINGLE";
 export const GET_MASTER_EARNING_DATA_END = "GET_POSITION_DATA_END";
 
+
+// PAYROLL CALCULATION ==========================
+export const GET_PAYROLL_CAL_DATA = "GET_PAYROLL_CAL_DATA";
+export const GET_PAYROLL_CAL_DATA_START = "GET_PAYROLL_CAL_DATA_START";
+export const GET_PAYROLL_CAL_DATA_SINGLE = "GET_PAYROLL_CAL_DATA_SINGLE";
+export const GET_PAYROLL_CAL_DATA_END = "GET_PAYROLL_CAL_DATA_END";
+
 // HR OPERATIONS ===> Leave_Category 
 
 export const GET_TRANSITION_LEAVE_CATEGORY_DATA = "GET_TRANSITION_LEAVE_CATEGORY_DATA";
@@ -516,3 +523,8 @@ export const GET_TransactionResignation_Confirmation = "GET_TransactionResignati
 export const GET_TransactionResignation_Waiting = "GET_TransactionResignation_Waiting";
 export const GET_TransactionResignation_END = "GET_TransactionResignation_END"; 
 
+
+
+export const GET_SALARY_ON_HOLD_START = "GET_SALARY_ON_START";
+export const GET_SALARY_ON_HOLD = "GET_SALARY_ON_HOLD";
+export const GET_SALARY_ON_HOLD_END = "GET_SALARY_ON_HOLD_END";

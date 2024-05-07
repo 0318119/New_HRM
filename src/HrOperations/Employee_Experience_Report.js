@@ -75,10 +75,14 @@ function Experience_Report({
             if (isValid) {
                 const result = await PostExperiencePayload(data?.Emp_Code);
                 if (result?.success) {
-                    message.success('PDF is created, Wait PDF is under downloading...');
-                    setExperienceReportData(result?.data);
-                    setFormSubmitted(true);
-                    setSelectedEmployee(data?.Emp_Code);
+                    if(result?.data.length == 0){
+                        message.error('Record not found...');
+                    }else{
+                        message.success('PDF is created, Wait PDF is under downloading...');
+                        setExperienceReportData(result?.data);
+                        setFormSubmitted(true);
+                        setSelectedEmployee(data?.Emp_Code);
+                    }
                     // console.log("data.Emp_Code", result?.data)
                 } else {
                     message.error(result?.message || result?.messsage);

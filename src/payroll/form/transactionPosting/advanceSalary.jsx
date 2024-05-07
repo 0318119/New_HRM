@@ -13,6 +13,10 @@ const OneTimeAllowanceForm = ({ getDeductionEmployeeData, currentUser, getAllowa
     const [isNext, setIsNext] = useState(false)
     const [loading, setLoading] = useState(false)
     const [delLoading, setDelLoading] = useState(false)
+    const [messageApi, contextHolder] = message.useMessage();
+
+
+
     const [allowanceDetail, setAllowanceDetail] = useState({
         Amount: "",
         Remarks: "",
@@ -37,14 +41,14 @@ const OneTimeAllowanceForm = ({ getDeductionEmployeeData, currentUser, getAllowa
     const DataLoader = async () => {
         setLoader(true)
         const employeeData = await getDeductionEmployeeData({ Emp_code: currentUser })
-        const AllowanceDetail = await getAllowanceDetail({Emp_code: currentUser })
-            setAllowanceDetail({
-                Amount: AllowanceDetail[0]?.Amount == undefined ? '0' : AllowanceDetail[0]?.Amount,
-                Remarks: AllowanceDetail[0]?.Remarks == undefined ? '' : AllowanceDetail[0]?.Remarks,
-                Deduction_code: "28",
-                Allowance_Code: 0,
-                Emp_code: employee?.Sequence_no,
-            })
+        const AllowanceDetail = await getAllowanceDetail({ Emp_code: currentUser })
+        setAllowanceDetail({
+            Amount: AllowanceDetail[0]?.Amount == undefined ? '' : AllowanceDetail[0]?.Amount,
+            Remarks: AllowanceDetail[0]?.Remarks == undefined ? '' : AllowanceDetail[0]?.Remarks,
+            Deduction_code: "28",
+            Allowance_Code: 0,
+            Emp_code: employee?.Sequence_no,
+        })
         setEmployee(employeeData[0]);
         setLoader(false)
     }
@@ -53,7 +57,7 @@ const OneTimeAllowanceForm = ({ getDeductionEmployeeData, currentUser, getAllowa
         setAllowanceDetail(
             {
                 Amount: allowanceDetail.Amount,
-                Remarks: e,
+                Remarks: e.target.value,
                 Deduction_code: allowanceDetail.Deduction_code,
                 Allowance_Code: allowanceDetail.Allowance_Code,
                 Emp_code: allowanceDetail.Emp_code,
@@ -63,7 +67,7 @@ const OneTimeAllowanceForm = ({ getDeductionEmployeeData, currentUser, getAllowa
     const AmountChange = (e) => {
         setAllowanceDetail(
             {
-                Amount: e,
+                Amount: e.target.value,
                 Remarks: allowanceDetail.Remarks,
                 Deduction_code: allowanceDetail.Deduction_code,
                 Allowance_Code: allowanceDetail.Allowance_Code,
@@ -93,7 +97,7 @@ const OneTimeAllowanceForm = ({ getDeductionEmployeeData, currentUser, getAllowa
                 Remarks: allowanceDetail?.Remarks
             })
             if (AllowanceSave.success == "success") {
-                message.success('Allowance Created');
+                message.success('Advance Salary Created');
                 setLoading(false)
                 reset()
             }
@@ -102,30 +106,45 @@ const OneTimeAllowanceForm = ({ getDeductionEmployeeData, currentUser, getAllowa
     }
     return (
         <>
-            {loader ? <Skeleton active /> :
+            {contextHolder}
+            {loader ?
+                <div className="pt-3">
+                    <Skeleton active />
+                </div>
+                :
                 <>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Input value={employee?.Emp_name} readonly={true} label={'Employee Name'} name={'employeeName'} />
-                        <Input value={employee?.Desig_name} readonly={true} label={'Designation'} name={'designation'} />
-                        <Input value={employee?.Dept_name} readonly={true} label={'Department'} name={'department'} />
-                        <Input value={employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary == null ? "0.00" : employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary} readonly={true} label={'Last Month Net Salary'} name={'employeeName'} />
+                    <div className="row">
+                        <div className="col-md-3 p-0">
+                            <Input value={employee?.Emp_name} readonly={true} label={'Employee Name'} name={'employeeName'} />
+                        </div>
+                        <div className="col-md-3 p-0">
+                            <Input value={employee?.Desig_name} readonly={true} label={'Designation'} name={'designation'} />
+                        </div>
+                        <div className="col-md-3 p-0">
+                            <Input value={employee?.Dept_name} readonly={true} label={'Department'} name={'department'} />
+                        </div>
+                        <div className="col-md-3 p-0">
+                            <Input value={employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary == null ? "0.00" : employeeSallary?.LastMonthNetSalary?.LastMonthNetSalary} readonly={true} label={'Last Month Net Salary'} name={'employeeName'} />
+                        </div>
+
+                        <div className="col-12 mt-5">
+                            <h3 style={{ color: 'black' }}><b>Transaction Information</b></h3>
+                        </div>
+                        <hr />
+
+
+
+                        <div className="col-md-6 p-0">
+                            <Input onChange={AmountChange} value={allowanceDetail.Amount} placeholder={"Enter amount"} label={'Amount'} name={'Amount'} type={'number'} />
+                        </div>
+                        <div className="col-md-6 p-0">
+                            <Input onChange={RemarksChange} value={allowanceDetail.Remarks} placeholder={"Enter remarks"} label={'Remarks'} name={'Remarks'} max={'50'} />
+                        </div>
+                        <div className="col-12 mt-5 p-0 d-flex justify-content-end align-items-center">
+                            <CancelButton onClick={reset} title={'Cancel'} />
+                            <Button loading={loading} onClick={saveAllowance} title={'Save'} />
+                        </div>
                     </div>
-                    <>
-                        <div style={{ paddingTop: '20px' }}>
-                            <h3 style={{ color: 'black' }}>Transaction Information</h3>
-                            <hr />
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <Input onChange={AmountChange} value={allowanceDetail.Amount} label={'Amount'} name={'Amount'} type={'number'} />
-                            <Input onChange={RemarksChange} value={allowanceDetail.Remarks} label={'Remarks'} name={'Remarks'} max={'50'} />
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <CancelButton onClick={reset} title={'Cancel'} />
-                                <Button loading={loading} onClick={saveAllowance} title={'Save'} />
-                            </div>
-                        </div>
-                    </>
                 </>
             }
         </>

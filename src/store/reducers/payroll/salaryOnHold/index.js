@@ -1,7 +1,7 @@
 import {
-    GET_ALLOWANCE_START,
-    GET_ALLOWANCE_COMPLETE,
-    GET_ALLOWANCE_END,
+    GET_SALARY_ON_HOLD,
+    GET_SALARY_ON_HOLD_START,
+    GET_SALARY_ON_HOLD_END,
 } from '../../../actions/types'
 
 
@@ -13,17 +13,17 @@ const initState = {
 
 const SalaryOnHold = (state = initState, action) => {
     switch (action.type) {
-        case GET_ALLOWANCE_START:
+        case GET_SALARY_ON_HOLD_START:
             return {
                 ...state,
                 loading: action.payload,
             };
-        case GET_ALLOWANCE_COMPLETE:
+        case GET_SALARY_ON_HOLD:
             return {
                 ...state,
                 data: action.payload,
             };
-        case GET_ALLOWANCE_END:
+        case GET_SALARY_ON_HOLD_END:
             return {
                 ...state,
                 loading: action.payload,

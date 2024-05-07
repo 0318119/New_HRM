@@ -11,6 +11,7 @@ import { FormSelect } from '../../../../components/basic/input/formInput';
 import Header from '../../../../components/Includes/Header';
 import '../../../assest/css/paySlip.css'
 import { DateTime } from "luxon";
+import { message } from 'antd';
 
 const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) => {
     const [loading, setLoading] = useState(false)
@@ -21,6 +22,9 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
     const [PdfLoader, setPdfLoader] = useState(false)
     const [pdfPassowrd, setPdfPassowrd] = useState()
     const [isPdfData, setPdfData] = useState([])
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear();
     const borderColor = 'black'
 
     useEffect(() => {
@@ -38,12 +42,12 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
         Month: yup.string().required("Month is required"),
         Year: yup.string().required("Year is required"),
     });
-    
     const {
         control,
         formState: { errors },
         handleSubmit,
-        reset
+        reset,
+        setValue
     } = useForm({
         defaultValues: {
             Employee_Id: "",
@@ -286,6 +290,14 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
             borderWidth:1
         },
     });
+
+    useEffect(() => {
+        const selectedEmployee = selectOption?.find(item => item?.Emp_code == localStorage.getItem("Emp_code"));
+        setValue('Employee_Id', selectedEmployee?.Emp_code);
+        setValue('Month', currentMonth);
+        setValue('Year', currentYear);
+    }, [setValue, selectOption, currentMonth, currentYear]);
+
     const submitForm = async (data) => {
         setLoading(true)
         const DataFromApi = await TaxPdfData({
@@ -293,9 +305,16 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
             payroll_month: data?.Month,
             Emp_Code: data?.Employee_Id
         })
-        setPdfData(DataFromApi)
-        const PasswordData = await GetAllEmpPass(data?.Employee_Id)
-        setPdfPassowrd(PasswordData.data[0]?.Emp_nic_no)
+        if(DataFromApi?.length > 1){
+            setPdfData(DataFromApi)
+            const PasswordData = await GetAllEmpPass(data?.Employee_Id)
+            setPdfPassowrd(PasswordData.data[0]?.Emp_nic_no)
+            setLoading(false)
+            message.success("PDF is downloding...")
+        }else{
+            message.error("Record not found")
+            setLoading(false)
+        }
     }
 
     const blobProvider = async () => {
@@ -558,6 +577,8 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
         }
     }, [isPdfData, pdfPassowrd])
 
+    console.log("isPdfData",isPdfData)
+
 
     return (
         <>
@@ -577,6 +598,7 @@ const TaxPayslip = ({ TaxPdfData, GetAllEmp, GetAllEmpPass, GetCompanyLogo }) =>
                                     name={'Employee_Id'}
                                     label={'Select Employee'}
                                     options={options}
+                                    disabled={true}
                                 />
                                 <FormSelect
                                     errors={errors}

@@ -85,7 +85,7 @@ export const getAllowanceDetail_Fixed = (body) => async (dispatch, getState) => 
                 AllowanceCode: body?.Allowance_Code,
                 DeductionCode: "0",
                 ADEFlag: "A",
-                p_FOEFlag: "F"
+                FOEFlag: "F"
             })
         });
         const res = await response.json()
