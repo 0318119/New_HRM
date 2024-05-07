@@ -22,7 +22,7 @@ const SecondaryHeader = ({ title, total, searchParam, onSearchClick, isSearch, i
                             {isSearch &&
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent : "end"}}>
                                     <Input onChange={AllSearch} placeholder={'Search Here..'} />
-                                    <button onClick={onSearchClick}>Search</button>
+                                    <button style={{color:'white'}} onClick={onSearchClick}>Search</button>
                                 </div>
                             }
                         </div>

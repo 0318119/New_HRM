@@ -79,10 +79,10 @@ const FixedDeduction = ({ getFixedDeductionData, FixedDeduction }) => {
                 <Header />
             </div>
             <div>
-                <SecondaryHeader isSearch={mode == 'read' ? true : false} onSearchClick={onSearchClick} searchParam={uniSearch} title={'Transaction - Fixed Deduction'} total={""} />
+                <SecondaryHeader isSearch={mode == 'read' ? true : false} onSearchClick={onSearchClick} searchParam={uniSearch} title={'Fixed Deduction'} total={""} />
             </div>
             <div className={Style.TableBody}>
-                <div className="container px-0 pt-3">
+                <div className="container pt-3">
                     {mode == 'read' ?
                         <Table pagination={{
                             defaultCurrent: pageNo,

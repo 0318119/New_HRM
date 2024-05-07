@@ -83,20 +83,22 @@ const AdvanceAllowance = ({ GetEmployeeList, advanceSalary }) => {
                 <Header />
             </div>
             <div>
-                <SecondaryHeader isSearch={mode == 'read' ? true : false} onSearchClick={onSearchClick} searchParam={uniSearch} title={'Transaction - Advance Salary'} total={'1,000'} />
+                <SecondaryHeader isSearch={mode == 'read' ? true : false} onSearchClick={onSearchClick} searchParam={uniSearch} title={'Advance Salary'} total={''} />
             </div>
             <div className={Style.TableBody}>
-                {mode == 'read' ?
-                    <Table pagination={{
-                        defaultCurrent: pageNo,
-                        onChange: (p) => {
-                            setPageNo(p);
-                        },
-                        pageSize: pageSize,
-                    }} loading={advanceSalary?.loading} columns={columns} dataSource={advanceSalary?.data} />
-                    :
-                    <AdvanceSalaryForm cancel={setMode} currentUser={current} />
-                }
+                <div className="container pt-3">
+                    {mode == 'read' ?
+                        <Table pagination={{
+                            defaultCurrent: pageNo,
+                            onChange: (p) => {
+                                setPageNo(p);
+                            },
+                            pageSize: pageSize,
+                        }} loading={advanceSalary?.loading} columns={columns} dataSource={advanceSalary?.data} />
+                        :
+                        <AdvanceSalaryForm cancel={setMode} currentUser={current} />
+                    }
+                </div>
             </div>
         </>
     )
