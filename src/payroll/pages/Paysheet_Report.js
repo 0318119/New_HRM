@@ -2,43 +2,57 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { FormInput, FormSelect } from '../../../src/components/basic/input/formInput';
 import Header from '../../../src/components/Includes/Header';
-import { SimpleButton } from '../../../src/components/basic/button';
+import { PrimaryButton } from '../../../src/components/basic/button';
 import { message } from 'antd';
 import { useForm } from 'react-hook-form';
-import { Document, Page, Text, View, pdf, Image } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 import { yupResolver } from '@hookform/resolvers/yup';
+import * as FileSaver from 'file-saver'
+import XLSX from 'sheetjs-style'
 import * as yup from 'yup';
-import LogoUrl from '../../../src/Assets/Images/download.png';
-// import { GET_TranEducationReport_DATA } from '../store/actions/types';
-import * as Red_Bank_Letter_Report_Action from '../../store/actions/payroll/Paysheet_Report';
+import * as ACTIONS from '../../store/actions/payroll/Paysheet_Report';
 
 function Paysheet_Report({
-    GetPaysheet,
+    GetallPayrollCategories,
+    GetEmployee_Category,
+    PostPaysheetPayload,
     Red_Paysheet_Report,
-    PostPaysheetPayload
 }) {
     const [isLoading, setLoading] = useState(false);
     const [isFormSubmitted, setFormSubmitted] = useState(false);
     const empData = Red_Paysheet_Report?.data?.[0]?.res?.data;
     const [isDOBReportData, setDOBReportData] = useState([]);
-    const [currentDate, setCurrentDate] = useState('');
-    const [toDate, setToDate] = useState('');
     const [selectedEmployee, setSelectedEmployee] = useState('');
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear();
+    const [isGeneratedData, setGeneratedData] = useState([]);
+    const PayrollCategories_Data = Red_Paysheet_Report?.PayrollCategories?.[0]?.res
+    const EmployeeCategory_Data = Red_Paysheet_Report?.EmployeeCategory?.[0]?.res
 
-
-    // useEffect(() => {
-    //     const currentDate = new Date().toISOString().split('T')[0];
-    //     setCurrentDate(currentDate);
-    //     setToDate(currentDate); // Set the initial "To date" value
-    // }, []);
 
     // ===== SCHEMA =================
     const PaysheetReportSchema = yup.object().shape({
-
-
-        Emp_DOB: yup.string().required('Please Select the Birth Month'),
+        Payslip_month: yup.string().required('Please Select the Month'),
+        Payslip_year: yup.string().required('Please Select the Year Month'),
+        payroll_category_code: yup.string().required('Please Select the Payroll Category'),
+        Employee_category_code: yup.string().required('Please Select the Employee Category'),
     });
+
+    const data1 = PayrollCategories_Data?.data || [];
+    const data2 = EmployeeCategory_Data?.data || [];
+    const options1 = [
+        ...data1.map((item) => ({
+            value: item.Payroll_Category_code, // Value for the dropdown
+            label: item.Payroll_Category_name // Displayed label
+        })),
+    ];
+    const options2 = [
+        ...data2.map((item) => ({
+            value: item.Emp_Category_code,
+            label: item.Emp_Category_name
+        })),
+    ];
     const {
         control,
         formState: { errors },
@@ -46,177 +60,69 @@ function Paysheet_Report({
         setValue,
     } = useForm({
         defaultValues: {
-            Emp_DOB: '', // Set the default employee code here
+            Payslip_month: '',
+            Payslip_year: '',
+            payroll_category_code: '',
+            Employee_category_code: '',
         },
         mode: 'onChange',
         resolver: yupResolver(PaysheetReportSchema),
     });
 
-
-
-    // Set the default value for the Emp_DOB field
-    useEffect(() => {
-        if (empData && empData.length > 0) {
-            setValue('Emp_DOB', empData[0].Emp_DOB);
-        }
-    }, [empData, setValue]);
-
-
-    // console.log( Red_Date_Of_Birth_Inquiry_Report, "Response")
-
-    const onSubmit = async (data) => {
-        setLoading(true);
+    const submitForm = async (data) => {
+        setLoading(true)
         try {
             const isValid = await PaysheetReportSchema.validate(data);
             if (isValid) {
-                const result = await PostPaysheetPayload(data.Emp_DOB);
-                if (result?.success) {
-                    message.success('PDF is created, Wait PDF is under downloading...');
-                    setFormSubmitted(true);
-                    setDOBReportData(result?.data);
-                    console.log(result?.data, 'ugsfosdj')
-
-                    setSelectedEmployee(data.Emp_DOB);
-                    // console.log("data.Emp_DOB", data.Emp_DOB)
-                } else {
-                    message.error(result?.message || result?.messsage);
-                }
+                confirm(data)
             }
         } catch (error) {
             console.error(error);
+            setLoading(false)
         }
-        setLoading(false);
-    };
+    }
 
+  
+    const confirm = async (data) => {
+        const paylaod = {
+            "Payslip_year": data?.Payslip_year,
+            "Payslip_month": data?.Payslip_month,
+            "Employee_category_code": data?.Employee_category_code,
+            "payroll_category_code": data?.payroll_category_code
+        }
+        const isCheckResponse = await PostPaysheetPayload(paylaod)
+        if (isCheckResponse?.success) {
+            console.log("done", isCheckResponse?.data)
+            message.success("Your Report is downloading")
+            setLoading(false)
+            DownloadExcel(isCheckResponse?.data)
+        } else {
+            message.error(isCheckResponse?.message || isCheckResponse?.messsage)
+            setLoading(false)
+        }
+    }
 
-    // GET Paysheet =====================
-    useEffect(() => {
-        GetPaysheet();
-    }, [GetPaysheet]);
+    const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8';
+    const fileExtension = '.xlsx';
+    const DownloadExcel = async (report) => {
+        const ws = XLSX.utils.json_to_sheet(report);
+        const wb = { Sheets: { 'Paysheet_Report': ws }, SheetNames: ['Paysheet_Report'] };
+        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const data = new Blob([excelBuffer], { type: fileType });
+        FileSaver.saveAs(data, "Paysheet_Report" + fileExtension);
+    }
 
-    const styles = {
-        document: {
-            padding: 20,
-            fontFamily: 'Helvetica',
-            backgroundColor: '#f4f4f4',
-        },
-        header: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: 20,
-        },
-        logo: {
-            width: '80px',
-            height: '30px',
-            backgroundColor: 'yellow',
-        },
-        title: {
-            textAlign: 'center',
-            fontSize: 18,
-            fontWeight: 'bold',
-            marginBottom: 10,
-        },
-        date: {
-            fontSize: 12,
-            fontWeight: 'bold',
-            marginBottom: 10,
-        },
-        employeeSection: {
-            marginBottom: 20,
-        },
-        employeeItem: {
-            marginBottom: 15,
-            padding: 15,
-            backgroundColor: 'white',
-            borderRadius: 5,
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-        },
-        employeeName: {
-            fontSize: 12,
-            fontWeight: 'bold',
-        },
-        employeeDesignation: {
-            fontSize: 12,
-            marginBottom: 10,
-            color: '#555',
-        },
-        detailItem: {
-            fontSize: 12,
-            marginBottom: 5,
-            color: '#333',
-        },
-        detailLabel: {
-            fontWeight: 'bold',
-            marginRight: 5,
-        },
-    };
-
-    const PdfData =
-        <Document >
-            <Page size="A4">
-                <View style={{ fontFamily: 'Helvetica', fontSize: 12, flexDirection: 'column', backgroundColor: '#FFFFFF', padding: 20 }}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                        <Image src={LogoUrl} style={{ width: "80px", height: '30px', backgroundColor: 'yellow' }} />
-                        <Text style={{ textAlign: 'center', fontSize: 14, fontWeight: 'bold', margin: "20px 0" }}>
-                            DATE OF BIRTH INQUIRY REPORT
-                        </Text>
-
-                        <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
-                            DATED: {currentDate}
-                        </Text>
-                    </View>
-
-                    <View style={{ flexDirection: 'row', borderBottom: '1 solid #000', paddingBottom: '5', marginBottom: '5' }}>
-                        <Text style={{ width: '50%', textAlign: 'center', fontSize: 10, fontWeight: 'bold', backgroundColor: '#EFEFEF' }}>Employee Code</Text>
-                        <Text style={{ width: '50%', textAlign: 'center', fontSize: 10, fontWeight: 'bold', backgroundColor: '#EFEFEF' }}>Employee Name</Text>
-                        <Text style={{ width: '50%', textAlign: 'center', fontSize: 10, fontWeight: 'bold', backgroundColor: '#EFEFEF' }}>Designation</Text>
-                        <Text style={{ width: '50%', textAlign: 'center', fontSize: 10, fontWeight: 'bold', backgroundColor: '#EFEFEF' }}>Department</Text>
-                        <Text style={{ width: '50%', textAlign: 'center', fontSize: 10, fontWeight: 'bold', backgroundColor: '#EFEFEF' }}>Date Of Birth</Text>
-                        <Text style={{ width: '50%', textAlign: 'center', fontSize: 10, fontWeight: 'bold', backgroundColor: '#EFEFEF' }}>Month</Text>
-                        <Text style={{ width: '50%', textAlign: 'center', fontSize: 10, fontWeight: 'bold', backgroundColor: '#EFEFEF' }}>Day</Text>
-
-                    </View>
-                    {isDOBReportData?.map((item, index) => (
-                        <View key={index} style={{ flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: '#000000', alignItems: 'center', height: 24 }}>
-                            <Text style={{ width: '50%', textAlign: 'center', fontSize: 8, backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#F9F9F9' }}>{item?.Emp_id ? item?.Emp_id : null}</Text>
-                            <Text style={{ width: '50%', textAlign: 'center', fontSize: 8, backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#F9F9F9' }}>{item?.EmpName ? item?.EmpName : null}</Text>
-                            <Text style={{ width: '50%', textAlign: 'center', fontSize: 8, backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#F9F9F9' }}>{item?.Designation ? item?.Designation : null}</Text>
-                            <Text style={{ width: '50%', textAlign: 'center', fontSize: 8, backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#F9F9F9' }}>{item?.Department ? item?.Department : null}</Text>
-                            <Text style={{ width: '50%', textAlign: 'center', fontSize: 8, backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#F9F9F9' }}>{item?.DOB ? item?.DOB : null}</Text>
-                            <Text style={{ width: '50%', textAlign: 'center', fontSize: 8, backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#F9F9F9' }}>{item?.MonthNumber ? item?.MonthNumber : null}</Text>
-                            <Text style={{ width: '50%', textAlign: 'center', fontSize: 8, backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#F9F9F9' }}>{item?.DAY ? item?.DAY : null}</Text>
-                        </View>
-                    )
-
-                    )}
-                </View>
-            </Page>
-        </Document>
 
 
     useEffect(() => {
-        if (isDOBReportData.length > 0) {
-            handleDownload();
-        }
-    }, [isDOBReportData]);
+        setValue('Payslip_month', currentMonth);
+        setValue('Payslip_year', currentYear);
+    }, [setValue]);
 
-    const handleDownload = async () => {
-        try {
-            if (!selectedEmployee) {
-                message.error('Please select an employee.');
-                return;
-            }
-
-            // Generate PDF for the selected employee
-            const pdfBlob = await pdf(PdfData).toBlob();
-
-            // Save the PDF
-            saveAs(pdfBlob, `Employee Code_${selectedEmployee}.pdf`);
-        } catch (error) {
-            console.error('Error downloading PDF:', error);
-        }
-    };
+    useEffect(() => {
+        GetallPayrollCategories();
+        GetEmployee_Category();
+    }, []);
 
     return (
         <>
@@ -225,112 +131,66 @@ function Paysheet_Report({
                 <div className="row justify-content-center">
                     <div className="col-12">
                         <div>
-                            <form onSubmit={handleSubmit} >
+                            <form onSubmit={handleSubmit(submitForm)} >
                                 <h4 className="text-dark"> Payslip - Paysheet Report </h4>
                                 <hr />
                                 <div className="form-group formBoxCountry">
                                     <FormSelect
-                                        label={'Year'}
-                                        placeholder='Select Year'
-                                        id="year"
-                                        name="year"
-                                        options={[
-                                            {
-                                                value: 1,
-                                                label: '2021'
-                                            },
-                                            {
-                                                value: 2,
-                                                label: '2022'
-                                            },
-                                            {
-                                                value: 3,
-                                                label: '2023'
-                                            },
-                                            {
-                                                value: 4,
-                                                label: '2024'
-                                            },
-                                        ]}
-                                        showLabel={true}
                                         errors={errors}
                                         control={control}
-                                    />
-                                    <FormSelect
-
+                                        placeholder={"Please select a month"}
+                                        name={'Payslip_month'}
                                         label={'Month'}
-                                        placeholder='Select Month'
-                                        errors={errors}
-                                        control={control}
-                                        name={''}
-                                        type="Month"
                                         options={[
-                                            {
-                                                value: 1,
-                                                label: 'January'
-                                            },
-                                            {
-                                                value: 2,
-                                                label: 'Feburary'
-                                            },
-                                            {
-                                                value: 3,
-                                                label: 'March'
-                                            },
-                                            {
-                                                value: 4,
-                                                label: 'April'
-                                            },
-                                            {
-                                                value: 5,
-                                                label: 'May'
-                                            },
-                                            {
-                                                value: 6,
-                                                label: 'June'
-                                            },
-                                            {
-                                                value: 7,
-                                                label: 'July'
-                                            },
-                                            {
-                                                value: 8,
-                                                label: 'August'
-                                            },
-                                            {
-                                                value: 9,
-                                                label: 'September'
-                                            },
-                                            {
-                                                value: 10,
-                                                label: 'October'
-                                            },
-                                            {
-                                                value: 11,
-                                                label: 'November'
-                                            },
-                                            {
-                                                value: 12,
-                                                label: 'December'
-                                            },
+                                            { value: 1, label: 'January' },
+                                            { value: 2, label: 'February' },
+                                            { value: 3, label: 'March' },
+                                            { value: 4, label: 'April' },
+                                            { value: 5, label: 'May' },
+                                            { value: 6, label: 'June' },
+                                            { value: 7, label: 'July' },
+                                            { value: 8, label: 'August' },
+                                            { value: 9, label: 'September' },
+                                            { value: 10, label: 'October' },
+                                            { value: 11, label: 'November' },
+                                            { value: 12, label: 'December' },
                                         ]}
                                     />
                                     <FormSelect
+                                        errors={errors}
+                                        control={control}
+                                        name={'Payslip_year'}
+                                        placeholder={'Please select a year'}
+                                        label={'Please select a year'}
+                                        options={[
+                                            { value: 2021, label: '2021' },
+                                            { value: 2022, label: '2022' },
+                                            { value: 2023, label: '2023' },
+                                            { value: 2024, label: '2024' },
+                                            { value: 2025, label: '2025' },
+                                        ]}
+                                    />
+                                    <FormSelect
+                                        errors={errors}
+                                        control={control}
+                                        label={'Employee Category'}
+                                        placeholder='Select Employee Category'
+                                        id="payroll_category_code"
+                                        name="payroll_category_code"
+                                        options={options1}
+                                    />
+                                    <FormSelect
+                                        errors={errors}
+                                        control={control}
                                         label={'Payroll Category'}
                                         placeholder='Select Payroll Category'
-                                        id="payrollCategory"
-                                        name="payrollCategory"
-                                        options={[
-                                            { value: 'Y', label: 'Yes' },
-                                            { value: 'N', label: 'No' },
-                                        ]}
-                                        showLabel={true}
-                                        errors={errors}
-                                        control={control}
+                                        id="Employee_category_code"
+                                        name="Employee_category_code"
+                                        options={options2}
                                     />
                                 </div>
-                                <div className="paySlipBtnBox">
-                                    <SimpleButton type={'submit'} loading={isLoading} title="Download PDF" />
+                                <div className='paySlipBtnBox'>
+                                    <PrimaryButton type={'submit'} loading={isLoading} title="Submit" />
                                 </div>
                             </form>
                         </div>
@@ -346,8 +206,4 @@ function Paysheet_Report({
 function mapStateToProps({ Red_Paysheet_Report }) {
     return { Red_Paysheet_Report };
 }
-
-export default connect(mapStateToProps, {
-    PostPaysheetPayload: Red_Bank_Letter_Report_Action.PostPaysheetPayload,
-    GetPaysheet: Red_Bank_Letter_Report_Action.GetPaysheet,
-})(Paysheet_Report);
+export default connect(mapStateToProps, ACTIONS)(Paysheet_Report)

@@ -449,6 +449,8 @@ export const GET_PAYSHEET_Report_DATA = "GET_PAYSHEET_Report_DATA,";
 export const GET_PAYSHEET_Report_START = "GET_PAYSHEET_Report_START";
 export const GET_PAYSHEET_Report_PAYROLL = "GET_PAYSHEET_Report_PAYROLL";
 export const GET_PAYSHEET_Report_END = "GET_PAYSHEET_Report_END";
+export const GET_PAYSHEET_GetallPayrollCategories_DATA = "GET_PAYSHEET_GetallPayrollCategories_DATA";
+export const GET_PAYSHEET_Employee_Category_DATA = "GET_PAYSHEET_Employee_Category_DATA";
 
 
 // ========== ======= ===== MANUAL ATTENDANCE======== ===== === /

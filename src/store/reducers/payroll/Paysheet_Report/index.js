@@ -2,7 +2,9 @@ import {
     GET_PAYSHEET_Report_DATA,
     GET_PAYSHEET_Report_START,
     GET_PAYSHEET_Report_PAYROLL,
-    GET_PAYSHEET_Report_END
+    GET_PAYSHEET_Report_END,
+    GET_PAYSHEET_GetallPayrollCategories_DATA,
+    GET_PAYSHEET_Employee_Category_DATA
 } from '../../../actions/types.js'
 
 
@@ -23,6 +25,18 @@ const Red_Paysheet_Report = (state = initState, action) => {
             return {
                 ...state,
                 data: action.payload,
+                loading: action.loading,
+            };
+        case GET_PAYSHEET_GetallPayrollCategories_DATA:
+            return {
+                ...state,
+                PayrollCategories: action.payload,
+                loading: action.loading,
+            };
+        case GET_PAYSHEET_Employee_Category_DATA:
+            return {
+                ...state,
+                EmployeeCategory: action.payload,
                 loading: action.loading,
             };
         case GET_PAYSHEET_Report_PAYROLL:

@@ -217,7 +217,6 @@ function Date_Of_Birth_Inquiry_Report({
                             <h4 className="text-dark">DATE OF BIRTH INQUIRY </h4>
                             <div className="">
                                 <FormSelect
-
                                     label={'Select Month'}
                                     placeholder='Select Month'
                                     errors={errors}
@@ -274,8 +273,6 @@ function Date_Of_Birth_Inquiry_Report({
                                             label: 'December'
                                         },
                                     ]}
-
-
                                 />
                             </div>
                             <div className="paySlipBtnBox">

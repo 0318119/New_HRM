@@ -61,8 +61,8 @@ function Payroll_monthly_calculation({
         messageApi.error(response?.message);
       }
     } catch (error) {
-      console.error("Error occurred while changing Marriage:", error);
-      messageApi.error("An error occurred while Save Marriage");
+      console.error("Error occurred while calculation:", error);
+      messageApi.error("An error occurred while calculations calculation");
     }
   };
 
@@ -83,8 +83,8 @@ function Payroll_monthly_calculation({
         setLoading(false)
       }
     } catch (error) {
-      console.error("Error occurred while changing Marriage:", error);
-      messageApi.error("An error occurred while Save Marriage");
+      console.error("Error occurred while Hr Entry:", error);
+      messageApi.error("An error occurred while Hr Entry");
       setLoading(false)
     }
   };
